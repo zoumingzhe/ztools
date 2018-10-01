@@ -10,7 +10,7 @@ Language :cn: 简体中文_ :us: English_
 PyTools模块封装了使用Python语言编写的工具。
 
 - 工程主页: https://github.com/zoumingzhe/PyTools
-- 下载地址: https://pypi.python.org/pypi/pyserial
+- 下载地址: https://pypi.python.org/pypi/PyTools
 - 法律许可: MIT license, (C) 2018 ZouMingzhe <zoumingzhe@qq.com>
 
 安装
