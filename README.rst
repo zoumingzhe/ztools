@@ -15,8 +15,8 @@ PyTools模块封装了使用Python语言编写的工具。
 
 工具
 ====
-- Timeout: https://github.com/zoumingzhe/PyTools/Timeout.py
-- ProgressBar: https://github.com/zoumingzhe/PyTools/ProgressBar.py
+- Timeout: https://github.com/zoumingzhe/PyTools/blob/master/PyTools/Timeout.py
+- ProgressBar: https://github.com/zoumingzhe/PyTools/blob/master/PyTools/ProgressBar.py
 
 文档
 ====
@@ -30,7 +30,7 @@ API（应用程序接口）文档、用法和例程可查阅 documentation_ 目�
 
 测试
 ====
-测试单元存放在工程文件的 rest_ 目录下。
+测试单元存放在工程文件的 test_ 目录下。
 
 
 安装
