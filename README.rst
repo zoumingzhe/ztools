@@ -15,9 +15,11 @@ PyTools模块封装了使用Python语言编写的工具。
 
 安装
 ====
-通过pip命令安装PyTools模块，更多安装信息请查阅 安装文档_ 。
+通过pip命令安装PyTools模块命令：
 
 ``pip install PyTools`` 
+
+更多安装信息请查阅 安装文档_ 。
 
 工具
 ====
