@@ -1,8 +1,8 @@
 Metadata-Version: 1.1
 Name: ztools
-Version: 1.0.3
+Version: 1.0.5
 Summary: ToolBox for Python, Easy to Use.
-Home-page: https://zoumingzhe.github.io/
+Home-page: https://github.com/zoumingzhe/ztools
 Author: Zou Mingzhe
 Author-email: zoumingzhe@qq.com
 License: MIT
@@ -25,12 +25,18 @@ Description: ========================================
         
         ``pip install ztools`` 
         
+        如果已经ztools模块，可以通过pip命令更新：
+        
+        ``pip install --upgrade ztools`` 
+        
         更多安装信息请查阅 安装文档_ 。
         
         工具
         ====
-        - Timeout: https://github.com/zoumingzhe/ztools/blob/master/ztools/Timeout.py
-        - ProgressBar: https://github.com/zoumingzhe/ztools/blob/master/ztools/ProgressBar.py
+        - Timeout: https://github.com/zoumingzhe/ztools/blob/master/ztools/source/Timeout.py
+        超时，提供超时判断。
+        - ProgressBar: https://github.com/zoumingzhe/ztools/blob/master/ztools/source/ProgressBar.py
+        进度条，提供进度条显示。
         
         文档
         ====
