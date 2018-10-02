@@ -18,11 +18,11 @@ except ImportError:
 setup(
     name="ztools",
     description="ToolBox for Python, Easy to Use.",
-    version="1.0.3",
+    version="1.0.4",
     author="Zou Mingzhe",
     author_email="zoumingzhe@qq.com",
     url="https://zoumingzhe.github.io/",
-    py_modules=['source.Timeout', 'source.ProgressBar'],
+    py_modules=['ztools.Timeout', 'ztools.ProgressBar'],
     license="MIT",
     long_description=open('..\README.rst', mode='r', encoding='UTF-8').read(),
     classifiers=[
