@@ -1,4 +1,4 @@
-# setup.py for PyTools
+# setup.py for ztools
 #
 # Direct install (all systems):
 #   "python setup.py install"
@@ -16,13 +16,13 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    name="PyTools",
+    name="ztools",
     description="ToolBox for Python, Easy to Use.",
     version="1.0",
     author="Zou Mingzhe",
     author_email="zoumingzhe@qq.com",
     url="https://zoumingzhe.github.io/",
-    packages=['PyTools'],
+    packages=['ztools'],
     license="MIT",
     long_description=open('README.rst', mode='r', encoding='UTF-8').read(),
     classifiers=[
@@ -30,14 +30,11 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: MIT License',
-        'Natural Language :: Chinese',
+        'Natural Language :: English',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
-        'Topic :: Tool',
-        'Topic :: Timeout',
-        'Topic :: ProgressBar',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
