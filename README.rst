@@ -1,6 +1,6 @@
-================================
- PyTools  |build-status| |docs|
-================================
+=========
+ PyTools
+=========
 
 Language :cn: 简体中文_ :us: English_
 =========================================================================
@@ -57,9 +57,3 @@ API（应用程序接口）文档、用法和例程可查阅 documentation_ 目�
 .. _test: https://github.com/zoumingzhe/PyTools/tree/master/test
 .. _Python: http://python.org/
 .. _Sphinx: http://sphinx-doc.org/
-.. |build-status| image:: https://travis-ci.org/pyserial/pyserial.svg?branch=master
-   :target: https://travis-ci.org/pyserial/pyserial
-   :alt: Build status
-.. |docs| image:: https://readthedocs.org/projects/pyserial/badge/?version=latest
-   :target: http://pyserial.readthedocs.io/
-   :alt: Documentation
