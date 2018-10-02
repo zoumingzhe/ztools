@@ -46,8 +46,8 @@ API（应用程序接口）文档、用法和例程可查阅 documentation_ 目�
 
 
 .. _ZouMingzhe: https://zoumingzhe.github.io
-.. _简体中文: ../../README.rst
-.. _English: ../../documentation/en/README.rst
+.. _简体中文: https://github.com/zoumingzhe/ztools/blob/master/README.rst
+.. _English: https://github.com/zoumingzhe/ztools/blob/master/documentation/en/README.rst
 .. _license: https://github.com/zoumingzhe/ztools/blob/master/LICENSE.txt
 .. _安装文档: https://github.com/zoumingzhe/ztools/tree/master/documentation/ztools.rst#installation
 .. _documentation: https://github.com/zoumingzhe/ztools/tree/master/documentation
