@@ -11,7 +11,7 @@ PyTools模块封装了使用Python语言编写的工具。
 
 - 工程主页: https://github.com/zoumingzhe/PyTools
 - 下载地址: https://pypi.python.org/pypi/PyTools
-- 法律许可: MIT license_ , (C) 2018 ZouMingzhe <zoumingzhe@qq.com>
+- 法律许可: MIT license_ , (C) 2018 ZouMingzhe_ <zoumingzhe@qq.com>
 
 安装
 ====
@@ -42,12 +42,12 @@ API（应用程序接口）文档、用法和例程可查阅 documentation_ 目�
 
 支持
 ====
-本项目由 zoumingzhe@qq.com 作者主页_ 创建并维护。
+本项目由 ZouMingzhe_ <zoumingzhe@qq.com> 创建并维护。
 
 为了完善PyTools模块的功能，欢迎您贡献代码至本项目: https://github.com/zoumingzhe/PyTools
 
 
-.. _作者主页: https://zoumingzhe.github.io
+.. _ZouMingzhe: https://zoumingzhe.github.io
 .. _简体中文: ../../README.rst
 .. _English: ../../documentation/en/README.rst
 .. _license: https://github.com/zoumingzhe/PyTools/blob/master/LICENSE.txt
