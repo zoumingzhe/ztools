@@ -69,7 +69,7 @@ Platform: any
 Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Developers
 Classifier: Intended Audience :: End Users/Desktop
-Classifier: License :: OSI Approved :: BSD License
+Classifier: License :: OSI Approved :: MIT License
 Classifier: Natural Language :: Chinese
 Classifier: Operating System :: Microsoft :: Windows
 Classifier: Programming Language :: Python
