@@ -29,7 +29,7 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: End Users/Desktop',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: Chinese',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
