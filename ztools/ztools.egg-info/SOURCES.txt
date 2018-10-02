@@ -1,6 +1,6 @@
-ProgressBar.py
-Timeout.py
 setup.py
+source/ProgressBar.py
+source/Timeout.py
 ztools.egg-info/PKG-INFO
 ztools.egg-info/SOURCES.txt
 ztools.egg-info/dependency_links.txt
