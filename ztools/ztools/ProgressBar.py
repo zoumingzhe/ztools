@@ -32,7 +32,7 @@ class ProgressBar:
 # 百分比进度条：
 # 输入参数：progress
 # 返回参数：strprogressbar
-# 说明：调用该方法将返回百分比进度条，百分比进度条 = 百分比 + 进度条。
+# 说明：调用该方法将返回百分比进度条，百分比进度条 = 百分比 + 进度条。progress必须介于0至1之间。
     def PercentProgressBar(self, progress):
         progress = progress * 100
         if(progress > 100):
