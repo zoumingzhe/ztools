@@ -57,7 +57,7 @@ class Timeout:
 # 输入参数：threshold
 # 返回参数：True/False
 # 说明：调用该方法将进行超时判断。
-# 若self.__TimeStart != None，# 则将time.clock() - self.__TimeStart与threshold进行比较，
+# 若self.__TimeStart != None，则将time.clock() - self.__TimeStart与threshold进行比较，
 # 若time.clock() - self.__TimeStart > threshold，返回True，否则返回False。
 # 若self.__TimeStart == None，则记录当前时间至self.__TimeStart，返回False。
     def Timeout(self, threshold):
