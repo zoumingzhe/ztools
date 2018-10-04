@@ -29,7 +29,7 @@ class Timeout:
 # 说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
     def Version(self, isShow = False): 
         if(isShow):
-            print("[library]-[Tools_Timeout]-[vesion:%s]" % self.__version)
+            print("[ztools]-[Timeout]-[vesion:%s]" % self.__version)
         return self.__version
 # ----------------------------------------------------------------------------------------------------
 # 重置计时：
