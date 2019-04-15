@@ -31,6 +31,18 @@ ztools模块封装了使用Python语言编写的工具。
 - ProgressBar: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/ProgressBar.py
     进度条，提供进度条显示。
 
+- Plot: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Plot.py
+    绘图，提供基于matplotlib的绘图功能。
+
+- File: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/File.py
+    文件，提供文件访问与相关操作。
+
+- Xls: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Xls.py
+    Excle，提供对dui.xls文件访问与相关操作。
+
+- MySQL: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/MySQL.py
+    MySQL数据库，提供基于pymysql的MySQL数据库访问。
+
 文档
 ====
 API（应用程序接口）文档、用法和例程可查阅 documentation_ 目录下的文档。
