@@ -11,7 +11,7 @@
 # 已测试 | PercentProgressBar(self, ...)    | 百分比进度条
 # 已测试 | NumberProgressBar(self, ...)     | 数字进度条
 # ----------------------------------------------------------------------------------------------------
-class ProgressBar: 
+class ProgressBar:
     """
     ProgressBar类提供了进度条字符串。
     """
@@ -20,7 +20,7 @@ class ProgressBar:
         self.__progress = 0
         self.__progressbarlist = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█', '█']
 # ----------------------------------------------------------------------------------------------------
-    def Version(self, isShow = False): 
+    def Version(self, isShow = False):
         """
         版本显示：
         输入参数：isShow = False
