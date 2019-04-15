@@ -29,7 +29,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
 # ----------------------------------------------------------------------------------------------------
-class Plot: 
+class Plot:
     """
     Plot类提供了绘图功能，它是基于matplotlib的，同时也是matplotlib的增强。
     只需要几行代码即可获得绘制图形，大大缩减了绘图的代码行数，获得高质量的编程体验。
@@ -47,7 +47,7 @@ class Plot:
         plt.rcParams['axes.unicode_minus']=False    # 用来正常显示负号
         # 有中文出现的情况，需要u'内容'
 # ----------------------------------------------------------------------------------------------------
-    def Version(self, isShow = False): 
+    def Version(self, isShow = False):
         """
         版本显示：
         输入参数：isShow = False
@@ -62,7 +62,7 @@ class Plot:
 # 输入参数：
 # 返回参数：
 # 说明：调用该方法将绘图保存为文件。
-    def Save(self, path): 
+    def Save(self, path):
         fig = plt.figure(self.__title)
         fig.savefig(path)
 # ----------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ class Plot:
 # 输入参数：
 # 返回参数：image 图像数据
 # 说明：调用该方法将读取图像文件。
-    def Read(self, path): 
+    def Read(self, path):
         image = img.imread(path)
         return image
 # ----------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ class Plot:
 # 输入参数：
 # 返回参数：
 # 说明：调用该方法将显示绘图。
-    def Show(self): 
+    def Show(self):
         plt.figure(self.__title)
         plt.show()
 # ----------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ class Plot:
 # 输入参数：image 图像数据
 # 返回参数：
 # 说明：调用该方法将显示图像。
-    def ShowImage(self, image): 
+    def ShowImage(self, image):
         plt.imshow(image) # 显示图片
         plt.axis('off')   # 不显示坐标轴
         plt.show()
@@ -106,7 +106,7 @@ class Plot:
 # 输入参数：
 # 返回参数：
 # 说明：调用该方法将绘制坐标轴。
-    def Axis(self): 
+    def Axis(self):
         plt.figure(self.__title)
         # plt.axis["xzero"].set_visible(True)
         # plt.axis["xzero"].label.set_text("新建y=0坐标")
@@ -116,7 +116,7 @@ class Plot:
 # 输入参数：
 # 返回参数：
 # 说明：调用该方法将绘制网格线。
-    def Grid(self): 
+    def Grid(self):
         plt.figure(self.__title)
         plt.grid(True)
 # ----------------------------------------------------------------------------------------------------
@@ -132,7 +132,7 @@ class Plot:
 # 输入参数：point 可以是一个点对象，或是几个点对象组成的集合（列表）
 # 返回参数：
 # 说明：调用该方法将绘制散点图。
-    def Scatter(self, point): 
+    def Scatter(self, point):
         plt.figure(self.__title)
         if(type(point) == dict):
             plt.scatter(x = point['x'], y = point['y'], s = point['size'],
