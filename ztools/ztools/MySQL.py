@@ -17,6 +17,7 @@ class MySQL:
     """
     def __init__(self):
         self.__version = "0.1"
+        self.__db = None
 # ----------------------------------------------------------------------------------------------------
     def Version(self, isShow = False):
         """
@@ -33,43 +34,60 @@ class MySQL:
         """
         打开数据库连接：
         输入参数：info
-        返回参数：db 数据库操作对象
+        返回参数：self.__db 数据库操作对象
         说明：调用该方法将返回数据库操作对象。
         """
-        db = pymysql.connect(host=info['host'], port=info['port'], user=info['user'], passwd=info['passwd'], db=info['db'], charset=info['charset'])
-        return db
+        self.__db = pymysql.connect(host=info['host'], port=info['port'], user=info['user'], passwd=info['passwd'], db=info['db'], charset=info['charset'])
+        return self.__db
 # ----------------------------------------------------------------------------------------------------
-    def unlink(self, db):
-        # 关闭数据库连接
-        db.close()
+    def unlink(self):
+        """
+        关闭数据库连接：
+        输入参数：
+        返回参数：
+        说明：调用该方法将释放数据库操作对象。
+        """
+        self.__db.close()
+        # self.__db = None
+        return self.__db
 # ----------------------------------------------------------------------------------------------------
-    def version(self, db):
+    def version(self):
+        """
+        MySQL版本显示：
+        输入参数：
+        返回参数：
+        说明：调用该方法将返回所连接的MySQL版本号。
+        """
         # 使用 cursor() 方法创建一个游标对象 cursor
-        cursor = db.cursor()
+        cursor = self.__db.cursor()
         # 使用 execute() 方法执行 SQL 查询 
         cursor.execute("SELECT VERSION()")
         # 使用 fetchone() 方法获取单条数据.
         data = cursor.fetchone()
         return("mysql version : " + data[0])
 # ----------------------------------------------------------------------------------------------------
-    def commit(self, db, sql):
-        cursor = db.cursor()
+    def commit(self, sql):
+        if self.__db == None:
+            return False
+        cursor = self.__db.cursor()
         #print(sql)
         try:
             # 执行sql语句
             cursor.execute(sql)
             # 提交到数据库执行
-            db.commit()
+            self.__db.commit()
             # 执行成功
             return True
         except:
             # 错误回滚
-            db.rollback()
+            self.__db.rollback()
             # 执行失败
             return False
 # ----------------------------------------------------------------------------------------------------
-    def fetch(self, db, sql):
-        cursor = db.cursor()
+    def fetch(self, sql):
+        if self.__db == None:
+            return False
+        cursor = self.__db.cursor()
         #print(sql)
         try:
             # 执行sql语句
@@ -79,7 +97,7 @@ class MySQL:
         except:
             return ()
 # ----------------------------------------------------------------------------------------------------
-    def update(self, db, tab, obj):
+    def update(self, tab, obj):
         obj2 = []
         for akey,avalue in obj.items():
             #print('%s = %s' % (akey,avalue))
@@ -88,12 +106,12 @@ class MySQL:
         #print(obj2)
         # SQL 插入语句
         sql = "UPDATE %s SET %s WHERE %s" % (tab, obj2[0], obj2[1])
-        if commit(db, sql):
+        if commit(sql):
             return True
         else:
             return False
 # ----------------------------------------------------------------------------------------------------
-    def insert(self, db, tab, obj):
+    def insert(self, tab, obj):
         key = []
         val = []
         for akey,avalue in obj.items():
@@ -106,16 +124,16 @@ class MySQL:
         #print(obj2)
         # SQL 插入语句
         sql = "INSERT INTO %s(%s) VALUES(%s)" % (tab, obj2[0], obj2[1])
-        # cmd(db, sql)
-        if commit(db, sql):
+        # cmd(sql)
+        if commit(sql):
             return True
         else:
-            return update(db, tab, obj)
+            return update(tab, obj)
 # ----------------------------------------------------------------------------------------------------
-    def select(self, db, tab, where=None):
+    def select(self, tab, where=None):
         sql = "select * from %s" % tab
         if where != None:
             sql = "%s where %s" % (sql, where)
         #print(sql)
-        return fetch(db, sql)
+        return fetch(sql)
 # ----------------------------------------------------------------------------------------------------
