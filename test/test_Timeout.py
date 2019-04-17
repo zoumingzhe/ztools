@@ -25,7 +25,7 @@ for n in range(5):
 print("TimeStart值：%0.3f sec" % ztools_timeout.GetTimeStart())
 
 print("重置计时： %0.3f sec" % ztools_timeout.Reset())
-print("超时判断（5 sec）：")
+print("超时判断（3 sec）：")
 for n in range(10):
     time.sleep(1)
     if ztools_timeout.Timeout(3):
