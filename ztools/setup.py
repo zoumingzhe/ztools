@@ -18,13 +18,19 @@ except ImportError:
 setup(
     name="ztools",
     description="ToolBox for Python, Easy to Use.",
-    version="1.3.5",
+    version="1.3.6",
     author="Zou Mingzhe",
     author_email="zoumingzhe@qq.com",
     url="https://github.com/zoumingzhe/ztools",
     packages=['ztools'],
     license="MIT",
     long_description=open('..\README.rst', mode='r', encoding='UTF-8').read(),
+    install_requires=[
+        'matplotlib',
+        'pymysql',
+        'xlrd',
+        'xlwt',
+    ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
