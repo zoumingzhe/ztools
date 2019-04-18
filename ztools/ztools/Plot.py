@@ -62,9 +62,9 @@ class Plot:
     def Save(self, path):
         """
         保存绘图：
-        输入参数：
+        输入参数：path 存储路径
         返回参数：
-        说明：调用该方法将绘图保存为文件。
+        说明：调用该方法将绘图figure保存为文件，保存路径由path指定。
         """
         fig = plt.figure(self.__title)
         fig.savefig(path)
@@ -74,7 +74,7 @@ class Plot:
         读取文件：
         输入参数：
         返回参数：image 图像数据
-        说明：调用该方法将读取图像文件。
+        说明：调用该方法将读取图像文件，并返回读取到的图像数据image。
         """
         image = img.imread(path)
         return image
@@ -84,7 +84,7 @@ class Plot:
         显示绘图：
         输入参数：
         返回参数：
-        说明：调用该方法将显示绘图。
+        说明：调用该方法将显示绘图figure。
         """
         plt.figure(self.__title)
         plt.show()
@@ -94,7 +94,7 @@ class Plot:
         显示图像：
         输入参数：image 图像数据
         返回参数：
-        说明：调用该方法将显示图像。
+        说明：调用该方法将显示图像image。
         """
         plt.imshow(image) # 显示图片
         plt.axis('off')   # 不显示坐标轴
@@ -118,7 +118,7 @@ class Plot:
         绘制坐标轴：
         输入参数：
         返回参数：
-        说明：调用该方法将绘制坐标轴。
+        说明：调用该方法将在绘图figure上绘制坐标轴。
         """
         plt.figure(self.__title)
         # plt.axis["xzero"].set_visible(True)
@@ -130,7 +130,7 @@ class Plot:
         绘制网格线：
         输入参数：
         返回参数：
-        说明：调用该方法将绘制网格线。
+        说明：调用该方法将在绘图figure上绘制网格线。
         """
         plt.figure(self.__title)
         plt.grid(True)
