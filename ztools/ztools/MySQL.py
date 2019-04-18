@@ -67,6 +67,12 @@ class MySQL:
         return("mysql version : " + data[0])
 # ----------------------------------------------------------------------------------------------------
     def commit(self, sql):
+        """
+        提交：
+        输入参数：sql 执行语句
+        返回参数：
+        说明：调用该方法将执行sql语句，提交到数据库执行。
+        """
         if self.__db == None:
             return False
         cursor = self.__db.cursor()
@@ -85,6 +91,12 @@ class MySQL:
             return False
 # ----------------------------------------------------------------------------------------------------
     def fetch(self, sql):
+        """
+        检索：
+        输入参数：sql 检索条件
+        返回参数：检索信息
+        说明：调用该方法将执行sql语句，返回检索到的信息。
+        """
         if self.__db == None:
             return False
         cursor = self.__db.cursor()
