@@ -84,6 +84,12 @@ class File:
         return folder
 # ----------------------------------------------------------------------------------------------------
     def copy(self, srcfile, dstfile):
+        """
+        拷贝文件：
+        输入参数：srcfile 源文件路径，dstfile 目的文件路径
+        返回参数：
+        说明：调用该方法将文件从源路径拷贝到目的路径。
+        """
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
         else:
@@ -94,6 +100,12 @@ class File:
             print("copy %s -> %s"%( srcfile,dstfile))
 # ----------------------------------------------------------------------------------------------------
     def move(self, srcfile, dstfile):
+        """
+        移动文件：
+        输入参数：srcfile 源文件路径，dstfile 目的文件路径
+        返回参数：
+        说明：调用该方法将文件从源路径移动到目的路径。
+        """
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
         else:
@@ -104,6 +116,12 @@ class File:
             print("move %s -> %s"%( srcfile,dstfile))
 # ----------------------------------------------------------------------------------------------------
     def delete(self, srcfile):
+        """
+        删除文件：
+        输入参数：srcfile 源文件路径
+        返回参数：
+        说明：调用该方法将文件从源路径删除。
+        """
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
         else:
