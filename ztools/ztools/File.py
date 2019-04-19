@@ -4,10 +4,19 @@
 # 类 File
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2019-04-20 | Zou Mingzhe   | Ver0.2  | 1.完善帮助信息
 # 2019-04-14 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
 # 已测试 | Version(self, ...)  | 版本显示
+# 已测试 | scan(self, ...)     | 扫描文件
+# 未测试 | get_path(self, ...) | 获取路径
+# 未测试 | get_name(self, ...) | 获取文件名
+# 未测试 |get_folder(self, ...)| 获取文件夹名
+# 已测试 | copy(self, ...)     | 拷贝文件
+# 已测试 | move(self, ...)     | 移动文件
+# 已测试 | delete(self, ...)   | 删除文件
+# 未开发 | zip(self, ...)      | 压缩文件
 # ----------------------------------------------------------------------------------------------------
 import os
 import shutil
@@ -54,25 +63,25 @@ class File:
         ffolder,fname=os.path.split(filepath)    #分离文件名和路径
         return fname
 # ----------------------------------------------------------------------------------------------------
-    def folder(self, filepath):
-        folder = []
-        for i in range(len(filepath)):
-            ffolder,fname=os.path.split(filepath[i])    #分离文件名和路径
-            folder.append(ffolder)
-        return folder
+    def get_path(self, folder, name):
+        path = []
+        for i in range(len(name)):
+            path.append(folder + '\\' + name[i])
+        return path
 # ----------------------------------------------------------------------------------------------------
-    def name(self, filepath):
+    def get_name(self, filepath):
         name = []
         for i in range(len(filepath)):
             fpath,fname=os.path.split(filepath[i])    #分离文件名和路径
             name.append(fname)
         return name
 # ----------------------------------------------------------------------------------------------------
-    def path(self, folder, name):
-        path = []
-        for i in range(len(name)):
-            path.append(folder + '\\' + name[i])
-        return path
+    def get_folder(self, filepath):
+        folder = []
+        for i in range(len(filepath)):
+            ffolder,fname=os.path.split(filepath[i])    #分离文件名和路径
+            folder.append(ffolder)
+        return folder
 # ----------------------------------------------------------------------------------------------------
     def copy(self, srcfile, dstfile):
         if not os.path.isfile(srcfile):
