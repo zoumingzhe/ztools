@@ -4,6 +4,7 @@
 # 类 Plot
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2019-04-20 | Zou Mingzhe   | Ver0.6  | 1.修改 Scatter(self, point)，输入的point类型支持list或者tuple
 # 2019-04-15 | Zou Mingzhe   | Ver0.5  | 1.完善帮助信息
 # 2019-02-11 | Zou Mingzhe   | Ver0.4  | 1.增加 Save(self, path)
 #            |               |         | 2.增加 Read(self, path)
@@ -148,7 +149,7 @@ class Plot:
     def Scatter(self, point):
         """
         绘制散点图：
-        输入参数：point 可以是一个点对象，或是几个点对象组成的集合（列表）
+        输入参数：point 可以是一个点对象，或是几个点对象组成的集合（列表or元组）
         返回参数：
         说明：调用该方法将绘制散点图。
         """
@@ -156,7 +157,7 @@ class Plot:
         if(type(point) == dict):
             plt.scatter(x = point['x'], y = point['y'], s = point['size'],
             c = point['color'], marker = point['marker'])
-        elif(type(point) == list):
+        elif(type(point) == list or type(point) == tuple):
             for i in range(len(point)):
                 onepoint = point[i]
                 plt.scatter(x = onepoint['x'], y = onepoint['y'], s = onepoint['size'],
