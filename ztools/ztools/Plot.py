@@ -72,7 +72,7 @@ class Plot(fil):
             fig = plt.figure(self.__title)
             fig.savefig(path)
         except:
-            print("path (%s) does not exist" % self.a_folder(path))
+            print("%s not exist" % self.a_folder(path))
 # ----------------------------------------------------------------------------------------------------
     def Read(self, path):
         """
