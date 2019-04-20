@@ -19,7 +19,7 @@
 # ----------------------------------------------------------------------------------------------------
 # MAP：
 # 已测试 | Version(self, ...)  | 版本显示
-# 已测试 | Save(self, ...)     | 保存绘图，保存路径不存在时异常
+# 已测试 | Save(self, ...)     | 保存绘图
 # 已测试 | Read(self, ...)     | 读取文件
 # 已测试 | Show(self)          | 显示绘图
 # 已测试 | ShowImage(self, ...)| 显示图像
@@ -30,8 +30,9 @@
 # ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
+import ztools.File       as fil
 # ----------------------------------------------------------------------------------------------------
-class Plot:
+class Plot(fil):
     """
     Plot类提供了绘图功能，它是基于matplotlib的，同时也是matplotlib的增强。
     只需要几行代码即可获得绘制图形，大大缩减了绘图的代码行数，获得高质量的编程体验。
@@ -67,8 +68,11 @@ class Plot:
         返回参数：
         说明：调用该方法将绘图figure保存为文件，保存路径由path指定。
         """
-        fig = plt.figure(self.__title)
-        fig.savefig(path)
+        try:
+            fig = plt.figure(self.__title)
+            fig.savefig(path)
+        except:
+            print("path (%s) does not exist" % self.a_folder(path))
 # ----------------------------------------------------------------------------------------------------
     def Read(self, path):
         """
