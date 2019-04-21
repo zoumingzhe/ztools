@@ -36,4 +36,4 @@ for n in range(10):
         print("计时 %d 时间： %0.3f sec，超时判断：False" % (n, ztools_timeout.Time()))
 print("TimeStart值： %0.3f sec" % ztools_timeout.GetTimeStart())
 
-input()
+input("按回车（Enter）继续")
