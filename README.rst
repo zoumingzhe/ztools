@@ -1,5 +1,5 @@
 ==================================================
-                    ztools        
+                    ztools
 ==================================================
         ToolBox for Python, Easy to Use.
 
@@ -16,11 +16,11 @@ ztools模块封装了使用Python语言编写的工具。
 ====
 通过pip命令安装ztools模块：
 
-``pip install ztools`` 
+``pip install ztools``
 
 如果已经安装ztools模块，可以通过pip命令更新：
 
-``pip install --upgrade ztools`` 
+``pip install --upgrade ztools``
 
 更多安装信息请查阅 安装文档_ 。
 
