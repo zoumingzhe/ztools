@@ -4,11 +4,13 @@
 # 类 File
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2019-04-29 | Zou Mingzhe   | Ver0.3  | 1.增加 map(self, key = None, path = None)
 # 2019-04-20 | Zou Mingzhe   | Ver0.2  | 1.完善帮助信息
 # 2019-04-14 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
 # 已测试 | Version(self, ...)  | 版本显示
+# 未测试 | map(self, ...)      | 路径映射
 # 已测试 | scan(self, ...)     | 扫描文件
 # 未测试 | get_path(self, ...) | 获取路径
 # 未测试 | get_name(self, ...) | 获取文件名
@@ -26,7 +28,8 @@ class File:
     File类提供了对文件访问的操作。
     """
     def __init__(self):
-        self.__version = "0.1"
+        self.__version = "0.3"
+        self.__path = {}
 # ----------------------------------------------------------------------------------------------------
     def Version(self, isShow = False):
         """
@@ -38,6 +41,19 @@ class File:
         if(isShow):
             print("[ztools]-[File]-[vesion:%s]" % self.__version)
         return self.__version
+# ----------------------------------------------------------------------------------------------------
+    def map(self, key = None, path = None):
+        """
+        路径映射：
+        输入参数：
+        返回参数：self.__path
+        说明：调用该方法将记录路径映射。
+        """
+        if(key != None and path != None):
+            self.__path[key] = path
+        if(key != None and path == None):
+            return self.__path[key]
+        return self.__path
 # ----------------------------------------------------------------------------------------------------
     def scan(self, directory, sub=False, prefix=None, postfix=None):
         info = []
