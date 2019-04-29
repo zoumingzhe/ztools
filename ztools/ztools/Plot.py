@@ -42,7 +42,7 @@ class Plot(fil):
     3、使用Scatter绘制散点图时，使用“点对象”作为参数，而不需要多个“向量”参数，并通过Point进一步简化了点的创建。
     """
     def __init__(self, title, size = None):
-        self.__version = "0.5"
+        self.__version = "0.6"
         self.__title   = title
         self.__figure  = plt.figure(num = self.__title, figsize = size)
         plt.title(self.__title)
