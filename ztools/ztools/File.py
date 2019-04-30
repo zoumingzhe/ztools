@@ -4,17 +4,19 @@
 # 类 File
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2019-04-30 | Zou Mingzhe   | Ver0.4  | 1.增加 ensure(self, path, iscreate = True)
 # 2019-04-29 | Zou Mingzhe   | Ver0.3  | 1.增加 map(self, key = None, path = None)
 # 2019-04-20 | Zou Mingzhe   | Ver0.2  | 1.完善帮助信息
 # 2019-04-14 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
 # 已测试 | Version(self, ...)  | 版本显示
-# 未测试 | map(self, ...)      | 路径映射
-# 已测试 | scan(self, ...)     | 扫描文件
+# 已测试 | map(self, ...)      | 路径映射
+# 已测试 | ensure(self, ...)   | 路径检查
 # 未测试 | get_path(self, ...) | 获取路径
 # 未测试 | get_name(self, ...) | 获取文件名
 # 未测试 |get_folder(self, ...)| 获取文件夹名
+# 已测试 | scan(self, ...)     | 扫描文件
 # 已测试 | copy(self, ...)     | 拷贝文件
 # 已测试 | move(self, ...)     | 移动文件
 # 已测试 | delete(self, ...)   | 删除文件
@@ -28,7 +30,7 @@ class File:
     File类提供了对文件访问的操作。
     """
     def __init__(self):
-        self.__version = "0.3"
+        self.__version = "0.4"
         self.__path = {}
 # ----------------------------------------------------------------------------------------------------
     def Version(self, isShow = False):
@@ -45,17 +47,63 @@ class File:
     def map(self, key = None, path = None):
         """
         路径映射：
-        输入参数：
+        输入参数：key, path
         返回参数：self.__path
-        说明：调用该方法将记录路径映射。
+        说明：该方法提供路径映射的记录，
+        若key、path均不为None则记录路径映射，
+        若只有key不为None则返回key的路径映射，
+        若key、path均为None则返回所有的的路径映射。
         """
         if(key != None and path != None):
             self.__path[key] = path
         if(key != None and path == None):
-            return self.__path[key]
+            return self.__path[key] # TODO：检查key是否在dict内
         return self.__path
 # ----------------------------------------------------------------------------------------------------
+    def ensure(self, path, iscreate = True):
+        """
+        路径检查：
+        输入参数：path, iscreate = True
+        返回参数：
+        说明：该方法检查路径path是否存在并返回，若不存在则根据iscreate指示生成路径。
+        """
+        if os.path.exists(path) == False and iscreate == True:
+            os.makedirs(path)
+        return os.path.exists(path)
+# ----------------------------------------------------------------------------------------------------
+    def a_folder(self, filepath):
+        return os.path.dirname(filepath)    #分离文件名和路径
+# ----------------------------------------------------------------------------------------------------
+    def a_name(self, filepath):
+        return os.path.basename(filepath)    #分离文件名和路径
+# ----------------------------------------------------------------------------------------------------
+    def get_path(self, folder, name):
+        path = []
+        for i in range(len(name)):
+            path.append(folder + '\\' + name[i])
+        return path
+# ----------------------------------------------------------------------------------------------------
+    def get_name(self, filepath):
+        name = []
+        for i in range(len(filepath)):
+            name.append(os.path.basename(filepath[i]))
+        return name
+# ----------------------------------------------------------------------------------------------------
+    def get_folder(self, filepath):
+        folder = []
+        for i in range(len(filepath)):
+            folder.append(os.path.dirname(filepath[i]))
+        return folder
+# ----------------------------------------------------------------------------------------------------
     def scan(self, directory, sub=False, prefix=None, postfix=None):
+        """
+        扫描文件：
+        输入参数：directory, sub=False, prefix=None, postfix=None
+        返回参数：info
+        说明：该方法在指定目录（directory）下进行文件扫描，
+        参数sub指定是否对子目录扫描（默认不扫描），
+        参数prefix、postfix分别指定文件名的前缀和后缀。
+        """
         info = []
         for root, sub_dirs, files in os.walk(directory):
             if sub == False:
@@ -71,34 +119,6 @@ class File:
                     info.append(os.path.join(root,special_file))
         return info
 # ----------------------------------------------------------------------------------------------------
-    def a_folder(self, filepath):
-        ffolder,fname=os.path.split(filepath)    #分离文件名和路径
-        return ffolder
-# ----------------------------------------------------------------------------------------------------
-    def a_name(self, filepath):
-        ffolder,fname=os.path.split(filepath)    #分离文件名和路径
-        return fname
-# ----------------------------------------------------------------------------------------------------
-    def get_path(self, folder, name):
-        path = []
-        for i in range(len(name)):
-            path.append(folder + '\\' + name[i])
-        return path
-# ----------------------------------------------------------------------------------------------------
-    def get_name(self, filepath):
-        name = []
-        for i in range(len(filepath)):
-            fpath,fname=os.path.split(filepath[i])    #分离文件名和路径
-            name.append(fname)
-        return name
-# ----------------------------------------------------------------------------------------------------
-    def get_folder(self, filepath):
-        folder = []
-        for i in range(len(filepath)):
-            ffolder,fname=os.path.split(filepath[i])    #分离文件名和路径
-            folder.append(ffolder)
-        return folder
-# ----------------------------------------------------------------------------------------------------
     def copy(self, srcfile, dstfile):
         """
         拷贝文件：
@@ -109,7 +129,7 @@ class File:
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
         else:
-            fpath,fname=os.path.split(dstfile)    #分离文件名和路径
+            fpath=os.path.dirname(dstfile)    #分离文件名和路径
             if not os.path.exists(fpath):
                 os.makedirs(fpath)                #创建路径
             shutil.copyfile(srcfile,dstfile)      #复制文件
@@ -125,7 +145,7 @@ class File:
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
         else:
-            fpath,fname=os.path.split(dstfile)    #分离文件名和路径
+            fpath=os.path.dirname(dstfile)    #分离文件名和路径
             if not os.path.exists(fpath):
                 os.makedirs(fpath)                #创建路径
             shutil.move(srcfile,dstfile)          #移动文件
