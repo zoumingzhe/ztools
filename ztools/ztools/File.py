@@ -4,23 +4,23 @@
 # 类 File
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
-# 2019-04-30 | Zou Mingzhe   | Ver0.4  | 1.增加 ensure(self, path, iscreate = True)
+# 2019-04-30 | Zou Mingzhe   | Ver0.4  | 1.增加 ensure(self, path, isCreate = True)
 # 2019-04-29 | Zou Mingzhe   | Ver0.3  | 1.增加 map(self, key = None, path = None)
 # 2019-04-20 | Zou Mingzhe   | Ver0.2  | 1.完善帮助信息
 # 2019-04-14 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
-# 已测试 | Version(self, ...)  | 版本显示
-# 已测试 | map(self, ...)      | 路径映射
-# 已测试 | ensure(self, ...)   | 路径检查
-# 未测试 | get_path(self, ...) | 获取路径
-# 未测试 | get_name(self, ...) | 获取文件名
-# 未测试 |get_folder(self, ...)| 获取文件夹名
-# 已测试 | scan(self, ...)     | 扫描文件
-# 已测试 | copy(self, ...)     | 拷贝文件
-# 已测试 | move(self, ...)     | 移动文件
-# 已测试 | delete(self, ...)   | 删除文件
-# 未开发 | zip(self, ...)      | 压缩文件
+# 已测试 | Version(self, ...)           | 版本显示
+# 已测试 | map(self, ...)               | 路径映射
+# 已测试 | ensure(self, ...)            | 路径检查
+# 未测试 | get_path(self, ...)          | 获取路径
+# 未测试 | get_name(self, ...)          | 获取文件名
+# 未测试 | get_folder(self, ...)        | 获取文件夹名
+# 已测试 | scan(self, ...)              | 扫描文件
+# 已测试 | copy(self, ...)              | 拷贝文件
+# 已测试 | move(self, ...)              | 移动文件
+# 已测试 | delete(self, ...)            | 删除文件
+# 未开发 | zip(self, ...)               | 压缩文件
 # ----------------------------------------------------------------------------------------------------
 import os
 import shutil
@@ -60,14 +60,14 @@ class File:
             return self.__path[key] # TODO：检查key是否在dict内
         return self.__path
 # ----------------------------------------------------------------------------------------------------
-    def ensure(self, path, iscreate = True):
+    def ensure(self, path, isCreate = True):
         """
         路径检查：
-        输入参数：path, iscreate = True
+        输入参数：path, isCreate = True
         返回参数：
         说明：该方法检查路径path是否存在并返回，若不存在则根据iscreate指示生成路径。
         """
-        if os.path.exists(path) == False and iscreate == True:
+        if os.path.exists(path) == False and isCreate == True:
             os.makedirs(path)
         return os.path.exists(path)
 # ----------------------------------------------------------------------------------------------------
