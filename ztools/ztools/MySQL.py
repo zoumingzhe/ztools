@@ -140,12 +140,12 @@ class MySQL:
         if self.commit(sql):
             return True
         else:
-            return update(tab, obj)
+            return self.update(tab, obj)
 # ----------------------------------------------------------------------------------------------------
     def select(self, tab, where=None):
         sql = "select * from %s" % tab
         if where != None:
             sql = "%s where %s" % (sql, where)
         #print(sql)
-        return fetch(sql)
+        return self.fetch(sql)
 # ----------------------------------------------------------------------------------------------------
