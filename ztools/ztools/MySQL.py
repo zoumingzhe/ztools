@@ -118,7 +118,7 @@ class MySQL:
         #print(obj2)
         # SQL 插入语句
         sql = "UPDATE %s SET %s WHERE %s" % (tab, obj2[0], obj2[1])
-        if commit(sql):
+        if self.commit(sql):
             return True
         else:
             return False
@@ -137,7 +137,7 @@ class MySQL:
         # SQL 插入语句
         sql = "INSERT INTO %s(%s) VALUES(%s)" % (tab, obj2[0], obj2[1])
         # cmd(sql)
-        if commit(sql):
+        if self.commit(sql):
             return True
         else:
             return update(tab, obj)
