@@ -18,15 +18,15 @@
 # 2018-11-19 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
-# 已测试 | Version(self, ...)  | 版本显示
-# 已测试 | Save(self, ...)     | 保存绘图
-# 已测试 | Read(self, ...)     | 读取文件
-# 已测试 | Show(self)          | 显示绘图
-# 已测试 | ShowImage(self, ...)| 显示图像
-# 已测试 | Label(self, ...)    | 添加坐标轴标签
-# 已测试 | Grid(self)          | 绘制网格线
-# 已测试 | Point(self, ...)    | 获取一个点对象
-# 已测试 | Scatter(self, ...)  | 绘制散点图
+# 已测试 | Version(self, ...)           | 版本显示
+# 已测试 | Save(self, ...)              | 保存绘图
+# 已测试 | Read(self, ...)              | 读取文件
+# 已测试 | Show(self)                   | 显示绘图
+# 已测试 | ShowImage(self, ...)         | 显示图像
+# 已测试 | Label(self, ...)             | 添加坐标轴标签
+# 已测试 | Grid(self)                   | 绘制网格线
+# 已测试 | Point(self, ...)             | 获取一个点对象
+# 已测试 | Scatter(self, ...)           | 绘制散点图
 # ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
