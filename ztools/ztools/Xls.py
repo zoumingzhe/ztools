@@ -9,11 +9,11 @@
 # MAP：
 # 已测试 | Version(self, ...)  | 版本显示
 # ----------------------------------------------------------------------------------------------------
-import ztools.File    as fil
+import ztools.File
 import xlrd
 import xlwt
 # ----------------------------------------------------------------------------------------------------
-class Xls(fil):
+class Xls(ztools.File):
     """
     Xls类提供了对.xls文件的操作。
     """
@@ -59,6 +59,13 @@ class Xls(fil):
             info.append(ainfo)
         return info
 # ----------------------------------------------------------------------------------------------------
+    def WriteFile(self, book, path):
+        try:
+            self.ensure(self.a_folder(path))
+            book.save(path)
+        except:
+            print("Excel文件\"%s\"保存失败，请检查路径是否正确、文件是否关闭！" % path)
+# ----------------------------------------------------------------------------------------------------
     def WriteObj(self, xls_file, sheet_name, obj, width_auto = True):
         # 创建Workbook对象
         book = xlwt.Workbook(encoding='utf-8', style_compression=0)
@@ -79,10 +86,7 @@ class Xls(fil):
                         cwidth[j] = awidth
                         sheet.col(j).width = 325 * cwidth[j]
         # 保存
-        try:
-            book.save(xls_file)
-        except:
-            print("Excel文件\"%s\"保存失败，请先关闭已打开的Excel文件！" % xls_file)
+        self.WriteFile(book, xls_file)
 # ----------------------------------------------------------------------------------------------------
     def WriteObjMulti(self, xls_file, sheet_name, obj, width_auto = True):
         # 创建Workbook对象
@@ -105,9 +109,5 @@ class Xls(fil):
                             cwidth[j] = awidth
                             sheet.col(j).width = 325 * cwidth[j]
         # 保存
-        try:
-            self.ensure(self.a_folder(xls_file))
-            book.save(xls_file)
-        except:
-            print("Excel文件\"%s\"保存失败，请检查路径是否正确、文件是否关闭！" % xls_file)
+        self.WriteFile(book, xls_file)
 # ----------------------------------------------------------------------------------------------------
