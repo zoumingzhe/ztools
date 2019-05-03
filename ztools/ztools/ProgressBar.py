@@ -102,6 +102,8 @@ class ProgressBar:
             for n in range(self.__maxlength):
                 sys.stdout.write(' ')
                 sys.stdout.flush()
+            sys.stdout.write('\r')
+            sys.stdout.flush()
         else:
             sys.stdout.write('\n')
             sys.stdout.flush()
