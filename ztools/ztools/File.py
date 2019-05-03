@@ -133,7 +133,7 @@ class File:
             if not os.path.exists(fpath):
                 os.makedirs(fpath)                #创建路径
             shutil.copyfile(srcfile,dstfile)      #复制文件
-            print("copy %s -> %s"%( srcfile,dstfile))
+            print(" copy %s \r\n to-> %s" % ( srcfile, dstfile ) )
 # ----------------------------------------------------------------------------------------------------
     def move(self, srcfile, dstfile):
         """
@@ -149,7 +149,7 @@ class File:
             if not os.path.exists(fpath):
                 os.makedirs(fpath)                #创建路径
             shutil.move(srcfile,dstfile)          #移动文件
-            print("move %s -> %s"%( srcfile,dstfile))
+            print(" move %s \r\n to-> %s" % ( srcfile, dstfile ) )
 # ----------------------------------------------------------------------------------------------------
     def delete(self, srcfile):
         """
