@@ -4,6 +4,10 @@
 # 类 File
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2019-05-23 | Zou Mingzhe   | Ver0.5  | 1.修改 get_path(self, folder, name)  输入支持单str或list
+#            |               |         | 2.修改 get_name(self, filepath)      输入支持单str或list
+#            |               |         | 3.修改 get_folder(self, filepath)    输入支持单str或list
+#            |               |         | 4.测试以上3个函数，完善函数帮助信息
 # 2019-04-30 | Zou Mingzhe   | Ver0.4  | 1.增加 ensure(self, path, isCreate = True)
 # 2019-04-29 | Zou Mingzhe   | Ver0.3  | 1.增加 map(self, key = None, path = None)
 # 2019-04-20 | Zou Mingzhe   | Ver0.2  | 1.完善帮助信息
@@ -13,9 +17,9 @@
 # 已测试 | Version(self, ...)           | 版本显示
 # 已测试 | map(self, ...)               | 路径映射
 # 已测试 | ensure(self, ...)            | 路径检查
-# 未测试 | get_path(self, ...)          | 获取路径
-# 未测试 | get_name(self, ...)          | 获取文件名
-# 未测试 | get_folder(self, ...)        | 获取文件夹名
+# 已测试 | get_path(self, ...)          | 获取路径
+# 已测试 | get_name(self, ...)          | 获取文件名
+# 已测试 | get_folder(self, ...)        | 获取文件夹名
 # 已测试 | scan(self, ...)              | 扫描文件
 # 已测试 | copy(self, ...)              | 拷贝文件
 # 已测试 | move(self, ...)              | 移动文件
@@ -30,7 +34,7 @@ class File:
     File类提供了对文件访问的操作。
     """
     def __init__(self):
-        self.__version = "0.4"
+        self.__version = "0.5"
         self.__path = {}
 # ----------------------------------------------------------------------------------------------------
     def Version(self, isShow = False):
@@ -71,29 +75,50 @@ class File:
             os.makedirs(path)
         return os.path.exists(path)
 # ----------------------------------------------------------------------------------------------------
-    def a_folder(self, filepath):
-        return os.path.dirname(filepath)    #分离文件名和路径
-# ----------------------------------------------------------------------------------------------------
-    def a_name(self, filepath):
-        return os.path.basename(filepath)    #分离文件名和路径
-# ----------------------------------------------------------------------------------------------------
     def get_path(self, folder, name):
-        path = []
-        for i in range(len(name)):
-            path.append(folder + '\\' + name[i])
-        return path
+        """
+        获取路径：
+        输入参数：folder, name
+        返回参数：path
+        说明：该方法生成文件路径，folder指定文件夹路径，name指定文件名（支持list）。
+        """
+        if type(name) == list:
+            path = []
+            for i in range(len(name)):
+                path.append(folder + '\\' + name[i])
+            return path
+        else:
+            return (folder + '\\' + name)
 # ----------------------------------------------------------------------------------------------------
     def get_name(self, filepath):
-        name = []
-        for i in range(len(filepath)):
-            name.append(os.path.basename(filepath[i]))
-        return name
+        """
+        获取文件名：
+        输入参数：filepath
+        返回参数：name
+        说明：该方法提取路径中的文件名，filepath指定文件路径（支持list）；若是文件夹路径则返回文件夹名。
+        """
+        if type(filepath) == list:
+            name = []
+            for i in range(len(filepath)):
+                name.append(os.path.basename(filepath[i]))
+            return name
+        else:
+            return os.path.basename(filepath)    #分离文件名和路径
 # ----------------------------------------------------------------------------------------------------
     def get_folder(self, filepath):
-        folder = []
-        for i in range(len(filepath)):
-            folder.append(os.path.dirname(filepath[i]))
-        return folder
+        """
+        获取文件夹名：
+        输入参数：filepath
+        返回参数：folder
+        说明：该方法提取路径中的文件夹名，filepath指定文件路径（支持list）；若是文件夹路径则返回上一级问价夹路径。
+        """
+        if type(filepath) == list:
+            folder = []
+            for i in range(len(filepath)):
+                folder.append(os.path.dirname(filepath[i]))
+            return folder
+        else:
+            return os.path.dirname(filepath)    #分离文件名和路径
 # ----------------------------------------------------------------------------------------------------
     def scan(self, directory, sub=False, prefix=None, postfix=None):
         """
