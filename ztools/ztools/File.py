@@ -4,6 +4,9 @@
 # 类 File
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2019-05-24 | Zou Mingzhe   | Ver0.6  | 1.增加 archive(self, srcdir, dstdir = None, name = None, format = "zip")
+#            |               |         | 2.增加 archive_unpack(self, srcpath, dstpath = None)
+#            |               |         | 3.测试以上2个函数，完善函数帮助信息
 # 2019-05-23 | Zou Mingzhe   | Ver0.5  | 1.修改 get_path(self, folder, name)  输入支持单str或list
 #            |               |         | 2.修改 get_name(self, filepath)      输入支持单str或list
 #            |               |         | 3.修改 get_folder(self, filepath)    输入支持单str或list
@@ -24,6 +27,8 @@
 # 已测试 | copy(self, ...)              | 拷贝文件
 # 已测试 | move(self, ...)              | 移动文件
 # 已测试 | delete(self, ...)            | 删除文件
+# 已测试 | archive(self, ...)           | 归档文件
+# 已测试 | archive_unpack(self, ...)    | 归档文件释放
 # 未开发 | zip(self, ...)               | 压缩文件
 # ----------------------------------------------------------------------------------------------------
 import os
@@ -34,7 +39,7 @@ class File:
     File类提供了对文件访问的操作。
     """
     def __init__(self):
-        self.__version = "0.5"
+        self.__version = "0.6"
         self.__path = {}
 # ----------------------------------------------------------------------------------------------------
     def Version(self, isShow = False):
@@ -189,9 +194,39 @@ class File:
             os.remove(srcfile)
             print("delete %s"%( srcfile))
 # ----------------------------------------------------------------------------------------------------
-    def zip(self, srcfile):
-        if not os.path.isfile(srcfile):
-            print("%s not exist!"%(srcfile))
+    def archive(self, srcdir, dstdir = None, buname = None, format = "zip"):
+        """
+        归档文件：
+        输入参数：srcdir          需要归档的文件路径
+                 dstdir = None   归档路径，不包括文件名，不指定时默认归档到同级文件夹下
+                 buname = None   归档文件名，不包含后缀，不指定时默认使用“backup_文件夹名”作为文件名
+                 format = "zip"  归档格式（zip、tar、bztar、gztar），默认使用zip
+        返回参数：
+        说明：调用该方法将文件归档至指定目录下。
+        """
+        if not os.path.exists(srcdir):
+            print("%s not exist!"%(srcdir))
         else:
-            shutil.make_archive(data_bak, "zip", srcfile)
+            if buname == None:
+                buname = "backup_" + self.get_name(srcdir)
+            if dstdir == None:
+                dstdir = self.get_folder(srcdir)
+            self.ensure(dstdir)
+            dstdir = self.get_path(dstdir, buname)
+            shutil.make_archive(dstdir, format, srcdir)
+# ----------------------------------------------------------------------------------------------------
+    def archive_unpack(self, srcpath, dstpath = None):
+        """
+        归档文件释放：
+        输入参数：srcpath          需要释放的归档文件路径，包含文件名及后缀
+                 dstpath = None   释放路径，不指定时默认释放到同级文件夹下
+        返回参数：
+        说明：调用该方法将归档文件释放至指定目录下。
+        """
+        if not os.path.isfile(srcpath):
+            print("%s not exist!"%(srcpath))
+        else:
+            if dstpath == None:
+                dstpath = self.get_folder(srcpath)
+            shutil.unpack_archive(srcpath, dstpath)
 # ----------------------------------------------------------------------------------------------------
