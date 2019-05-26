@@ -68,7 +68,7 @@ class Xls(ztools.File):
 # ----------------------------------------------------------------------------------------------------
     def WriteFile(self, book, path):
         try:
-            self.ensure(self.a_folder(path))
+            self.ensure(self.get_folder(path))
             book.save(path)
         except:
             print("Excel文件\"%s\"保存失败，请检查路径是否正确、文件是否关闭！" % path)
