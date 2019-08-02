@@ -39,7 +39,7 @@ ztools模块封装了使用Python语言编写的工具。
     文件，提供文件访问与相关操作。
 
 - Xls: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Xls.py
-    Excle，提供对dui.xls文件访问与相关操作。
+    Excle，提供对.xls文件访问与相关操作。
 
 - MySQL: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/MySQL.py
     MySQL数据库，提供基于pymysql的MySQL数据库访问。
