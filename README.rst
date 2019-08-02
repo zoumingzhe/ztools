@@ -26,22 +26,22 @@ ztools模块封装了使用Python语言编写的工具。
 
 工具
 ====
-- Timeout: ./ztools/ztools/Timeout.py
+- Timeout: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Timeout.py
     超时，提供超时判断。
 
-- ProgressBar: ./ztools/ztools/ProgressBar.py
+- ProgressBar: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/ProgressBar.py
     进度条，提供进度条显示。
 
-- Plot: ./ztools/ztools/Plot.py
+- Plot: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Plot.py
     绘图，提供基于matplotlib的绘图功能。
 
-- File: ./ztools/ztools/File.py
+- File: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/File.py
     文件，提供文件访问与相关操作。
 
-- Xls: ./ztools/ztools/Xls.py
+- Xls: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Xls.py
     Excle，提供对dui.xls文件访问与相关操作。
 
-- MySQL: ./ztools/ztools/MySQL.py
+- MySQL: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/MySQL.py
     MySQL数据库，提供基于pymysql的MySQL数据库访问。
 
 文档
