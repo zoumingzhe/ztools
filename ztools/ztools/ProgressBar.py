@@ -96,7 +96,7 @@ class ProgressBar:
         结束符：
         输入参数：isClean = False
         返回参数：
-        说明：调用该方法将在换行或清空屏幕进度条。
+        说明：调用该方法将换行或清空屏幕进度条。
         """
         if(isClean):
             for n in range(self.__maxlength):
