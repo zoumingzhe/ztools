@@ -6,7 +6,7 @@
 # For Python 3.x use the corresponding Python executable,
 # e.g. "python3 setup.py ..."
 #
-# (C) 2018 ZouMingzhe <zoumingzhe@qq.com>
+# (C) 2018-2020 ZouMingzhe <zoumingzhe@qq.com>
 #
 # SPDX-License-Identifier:    MIT
 
