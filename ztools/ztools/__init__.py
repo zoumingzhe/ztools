@@ -6,3 +6,4 @@ from  .ProgressBar   import  ProgressBar
 from  .Xls           import  Xls
 from  .MySQL         import  MySQL
 from  .Plot          import  Plot
+from  .Pool          import  Pool
