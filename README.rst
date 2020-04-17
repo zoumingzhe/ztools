@@ -26,22 +26,22 @@ ztools模块封装了使用Python语言编写的工具。
 
 工具
 ====
-- Timeout: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Timeout.py
+- timeout: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/tool/timeout.py
     超时，提供超时判断。
 
-- ProgressBar: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/ProgressBar.py
+- progressbar: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/tool/progressbar.py
     进度条，提供进度条显示。
 
-- Plot: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Plot.py
+- plot: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/GUI/plot.py
     绘图，提供基于matplotlib的绘图功能。
 
-- File: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/File.py
+- filebase: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/file/filebase.py
     文件，提供文件访问与相关操作。
 
-- Xls: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/Xls.py
+- xls: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/file/xls.py
     Excle，提供对.xls文件访问与相关操作。
 
-- MySQL: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/MySQL.py
+- MySQL: https://github.com/zoumingzhe/ztools/blob/master/ztools/ztools/db/MySQL.py
     MySQL数据库，提供基于pymysql的MySQL数据库访问。
 
 文档
