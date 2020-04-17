@@ -10,7 +10,7 @@ ztools模块封装了使用Python语言编写的工具。
 
 - 工程主页: https://github.com/zoumingzhe/ztools
 - 下载地址: https://pypi.python.org/pypi/ztools
-- 法律许可: MIT license_ , (C) 2018 ZouMingzhe_ <zoumingzhe@qq.com>
+- 法律许可: MIT license_ , (C) 2018-2020 ZouMingzhe_ <zoumingzhe@qq.com>
 
 安装
 ====
