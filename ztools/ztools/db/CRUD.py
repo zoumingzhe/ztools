@@ -114,7 +114,7 @@ class CRUD:
         vals = str(vals)[1:-1]
         sql = "INSERT INTO %s(%s) VALUES(%s)" % (tab, keys, vals)
         #print(sql)
-        return self.commit(sql)
+        return self.execute(sql)
 # ----------------------------------------------------------------------------------------------------
     def select(self, tab, where=None):
         """
@@ -138,12 +138,17 @@ class CRUD:
         """
         cols = []
         for akey,avalue in obj.items():
-            #print('%s = %s' % (akey, str(avalue)))
-            cols.append('%s = %s' % (akey, str(avalue)))
+            #print(akey, avalue)
+            if type(avalue) != str:
+                #print("%s = %s" % (akey, str(avalue)))
+                cols.append("%s = %s" % (akey, str(avalue)))
+            else:
+                #print("%s = '%s'" % (akey, str(avalue)))
+                cols.append("%s = '%s'" % (akey, str(avalue)))
         cols = ', '.join(cols)
         sql = "UPDATE %s SET %s WHERE %s" % (tab, cols, where)
         #print(sql)
-        return self.commit(sql)
+        return self.execute(sql)
 # ----------------------------------------------------------------------------------------------------
     def delete(self, tab, where=None):
         """
@@ -156,5 +161,5 @@ class CRUD:
         if where != None:
             sql = "%s where %s" % (sql, where)
         #print(sql)
-        return self.commit(sql)
+        return self.execute(sql)
 # ----------------------------------------------------------------------------------------------------
