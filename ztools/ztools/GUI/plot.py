@@ -4,29 +4,30 @@
 # 类 plot
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
-# 2019-04-20 | Zou Mingzhe   | Ver0.6  | 1.修改 Scatter(self, point)，输入的point类型支持list或者tuple
+# 2020-12-02 | Zou Mingzhe   | Ver0.7  | 1.优化 scatter(self, points)，多点绘制性能
+# 2019-04-20 | Zou Mingzhe   | Ver0.6  | 1.修改 scatter(self, points)，输入的points类型支持list或者tuple
 # 2019-04-15 | Zou Mingzhe   | Ver0.5  | 1.完善帮助信息
-# 2019-02-11 | Zou Mingzhe   | Ver0.4  | 1.增加 Save(self, path)
-#            |               |         | 2.增加 Read(self, path)
-#            |               |         | 3.增加 ShowImage(self, image)
-# 2019-01-28 | Zou Mingzhe   | Ver0.3  | 1.增加 Grid(self)
-#            |               |         | 2.增加 Point(self, x, y, size = None, color = None, marker = None)
-#            |               |         | 3.修改 Scatter(self, point)
-# 2018-11-21 | Zou Mingzhe   | Ver0.2  | 1.增加 Show(self)
-#            |               |         | 2.增加 Label(self, xlabel = None, ylabel = None)
-#            |               |         | 3.增加 Scatter(self, x, y)
+# 2019-02-11 | Zou Mingzhe   | Ver0.4  | 1.增加 save(self, path)
+#            |               |         | 2.增加 read(self, path)
+#            |               |         | 3.增加 showimage(self, image)
+# 2019-01-28 | Zou Mingzhe   | Ver0.3  | 1.增加 grid(self)
+#            |               |         | 2.增加 point(self, x, y, size = None, color = None, marker = None)
+#            |               |         | 3.修改 scatter(self, points)
+# 2018-11-21 | Zou Mingzhe   | Ver0.2  | 1.增加 show(self)
+#            |               |         | 2.增加 label(self, xlabel = None, ylabel = None)
+#            |               |         | 3.增加 scatter(self, x, y)
 # 2018-11-19 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
 # 已测试 | Version(self, ...)           | 版本显示
-# 已测试 | Save(self, ...)              | 保存绘图
-# 已测试 | Read(self, ...)              | 读取文件
-# 已测试 | Show(self)                   | 显示绘图
-# 已测试 | ShowImage(self, ...)         | 显示图像
-# 已测试 | Label(self, ...)             | 添加坐标轴标签
-# 已测试 | Grid(self)                   | 绘制网格线
-# 已测试 | Point(self, ...)             | 获取一个点对象
-# 已测试 | Scatter(self, ...)           | 绘制散点图
+# 已测试 | save(self, ...)              | 保存绘图
+# 已测试 | read(self, ...)              | 读取文件
+# 已测试 | show(self)                   | 显示绘图
+# 已测试 | showimage(self, ...)         | 显示图像
+# 已测试 | label(self, ...)             | 添加坐标轴标签
+# 已测试 | grid(self)                   | 绘制网格线
+# 已测试 | point(self, ...)             | 获取一个点对象
+# 已测试 | scatter(self, ...)           | 绘制散点图
 # ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
@@ -42,7 +43,7 @@ class plot(filebase):
     3、使用Scatter绘制散点图时，使用“点对象”作为参数，而不需要多个“向量”参数，并通过Point进一步简化了点的创建。
     """
     def __init__(self, title, size = None):
-        self.__version = "0.6"
+        self.__version = "0.7"
         self.__title   = title
         self.__figure  = plt.figure(num = self.__title, figsize = size)
         plt.title(self.__title)
@@ -61,7 +62,7 @@ class plot(filebase):
             print("[ztools]-[plot]-[vesion:%s]" % self.__version)
         return self.__version
 # ----------------------------------------------------------------------------------------------------
-    def Save(self, path):
+    def save(self, path):
         """
         保存绘图：
         输入参数：path 存储路径
@@ -74,7 +75,7 @@ class plot(filebase):
         except:
             print("%s not exist" % self.get_folder(path))
 # ----------------------------------------------------------------------------------------------------
-    def Read(self, path):
+    def read(self, path):
         """
         读取文件：
         输入参数：
@@ -84,7 +85,7 @@ class plot(filebase):
         image = img.imread(path)
         return image
 # ----------------------------------------------------------------------------------------------------
-    def Show(self):
+    def show(self):
         """
         显示绘图：
         输入参数：
@@ -94,7 +95,7 @@ class plot(filebase):
         plt.figure(self.__title)
         plt.show()
 # ----------------------------------------------------------------------------------------------------
-    def ShowImage(self, image):
+    def showimage(self, image):
         """
         显示图像：
         输入参数：image 图像数据
@@ -105,7 +106,7 @@ class plot(filebase):
         plt.axis('off')   # 不显示坐标轴
         plt.show()
 # ----------------------------------------------------------------------------------------------------
-    def Label(self, xlabel = None, ylabel = None):
+    def label(self, xlabel = None, ylabel = None):
         """
         添加坐标轴标签：
         输入参数：(xlabel = None, ylabel = None) x轴、y轴标签
@@ -118,7 +119,7 @@ class plot(filebase):
         if(ylabel != None):
             plt.ylabel(ylabel)
 # ----------------------------------------------------------------------------------------------------
-    def Axis(self):
+    def axis(self):
         """
         绘制坐标轴：
         输入参数：
@@ -130,7 +131,7 @@ class plot(filebase):
         # plt.axis["xzero"].label.set_text("新建y=0坐标")
         # plt.axis["xzero"].label.set_color('green')
 # ----------------------------------------------------------------------------------------------------
-    def Grid(self):
+    def grid(self):
         """
         绘制网格线：
         输入参数：
@@ -140,7 +141,7 @@ class plot(filebase):
         plt.figure(self.__title)
         plt.grid(True)
 # ----------------------------------------------------------------------------------------------------
-    def Point(self, x, y, size = None, color = None, marker = None):
+    def point(self, x, y, size = None, color = None, marker = None):
         """
         获取一个点对象：
         输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
@@ -150,40 +151,40 @@ class plot(filebase):
         point = {'x':x, 'y':y, 'size':size, 'color':color, 'marker':marker}
         return point
 # ----------------------------------------------------------------------------------------------------
-    def Scatter(self, point):
+    def scatter(self, points):
         """
         绘制散点图：
-        输入参数：point 可以是一个点对象，或是几个点对象组成的集合（列表or元组）
+        输入参数：points 可以是一个点对象，或是几个点对象组成的集合（列表or元组）
         返回参数：
         说明：调用该方法将绘制散点图。
         """
         plt.figure(self.__title)
-        if(type(point) == dict):
-            plt.scatter(x = point['x'], y = point['y'], s = point['size'],
-            c = point['color'], marker = point['marker'])
-        elif(type(point) == list or type(point) == tuple):
+        if(type(points) == dict):
+            plt.scatter(x = points['x'], y = points['y'], s = points['size'],
+            c = points['color'], marker = points['marker'])
+        elif(type(points) == list or type(points) == tuple):
             xs = []
             ys = []
             ss = []
             cs = []
             ms = []
-            for i in range(len(point)):
-                onepoint = point[i]
-                xs.append(onepoint['x'])
-                ys.append(onepoint['y'])
+            for i in range(len(points)):
+                point = points[i]
+                xs.append(point['x'])
+                ys.append(point['y'])
                 if ss != None:
-                    if onepoint['size'] != None:
-                        ss.append(onepoint['size'])
+                    if point['size'] != None:
+                        ss.append(point['size'])
                     else:
                         ss = None
                 if cs != None:
-                    if onepoint['color'] != None:
-                        cs.append(onepoint['color'])
+                    if point['color'] != None:
+                        cs.append(point['color'])
                     else:
                         cs = None
                 if ms != None:
-                    if onepoint['marker'] != None:
-                        ms.append(onepoint['marker'])
+                    if point['marker'] != None:
+                        ms.append(point['marker'])
                     else:
                         ms = None
             plt.scatter(x = xs, y = ys, s = ss, c = cs, marker = ms)
