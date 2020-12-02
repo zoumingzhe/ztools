@@ -4,7 +4,11 @@
 # 类 plot
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2020-12-xx | Zou Mingzhe   | Ver0.8  | 1.增加 xyscatter(self, x, y, size = None, color = None, marker = None)
+#            |               |         | 2.增加 xyplot(self, x, y, color = None, linewidth = None, label = None)
+#            |               |         | 3.增加 xybar(self, x, y, color = None, align = None)
 # 2020-12-02 | Zou Mingzhe   | Ver0.7  | 1.优化 scatter(self, points)，多点绘制性能
+#            |               |         | 2.增加 points(self, x, y, size = None, color = None, marker = None)
 # 2019-04-20 | Zou Mingzhe   | Ver0.6  | 1.修改 scatter(self, points)，输入的points类型支持list或者tuple
 # 2019-04-15 | Zou Mingzhe   | Ver0.5  | 1.完善帮助信息
 # 2019-02-11 | Zou Mingzhe   | Ver0.4  | 1.增加 save(self, path)
@@ -27,6 +31,10 @@
 # 已测试 | label(self, ...)             | 添加坐标轴标签
 # 已测试 | grid(self)                   | 绘制网格线
 # 已测试 | point(self, ...)             | 获取一个点对象
+# 已测试 | points(self, ...)            | 获取多个点对象
+# 已测试 | xybar(self, ...)             | 绘制条形图
+# 已测试 | xyplot(self, ...)            | 绘制折线图
+# 已测试 | xyscatter(self, ...)         | 绘制散点图
 # 已测试 | scatter(self, ...)           | 绘制散点图
 # ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
@@ -151,6 +159,48 @@ class plot(filebase):
         point = {'x':x, 'y':y, 'size':size, 'color':color, 'marker':marker}
         return point
 # ----------------------------------------------------------------------------------------------------
+    def points(self, x, y, size = None, color = None, marker = None):
+        """
+        获取多个点对象：
+        输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
+        返回参数：points
+        说明：调用该方法将获取一个点对象，点的坐标（x、y）是必须的，其他可选。
+        """
+        points = []
+        for i in range(len(x)):
+            points.append({'x':x[i], 'y':y[i], 'size':size, 'color':color, 'marker':marker})
+        return points
+# ----------------------------------------------------------------------------------------------------
+    def xybar(self, x, y, color = None, align = None):
+        """
+        绘制条形图：
+        输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
+        返回参数：
+        说明：调用该方法将绘制条形图。
+        """
+        plt.figure(self.__title)
+        plt.bar(x, y)
+# ----------------------------------------------------------------------------------------------------
+    def xyplot(self, x, y, color = None, linewidth = None, label = None):
+        """
+        绘制折线图：
+        输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
+        返回参数：
+        说明：调用该方法将绘制折线图。
+        """
+        plt.figure(self.__title)
+        plt.plot(x, y)
+# ----------------------------------------------------------------------------------------------------
+    def xyscatter(self, x, y, size = None, color = None, marker = None):
+        """
+        绘制散点图：
+        输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
+        返回参数：
+        说明：调用该方法将绘制散点图。
+        """
+        plt.figure(self.__title)
+        plt.scatter(x, y, s = size, c = color, marker = marker)
+# ----------------------------------------------------------------------------------------------------
     def scatter(self, points):
         """
         绘制散点图：
@@ -160,7 +210,7 @@ class plot(filebase):
         """
         plt.figure(self.__title)
         if(type(points) == dict):
-            plt.scatter(x = points['x'], y = points['y'], s = points['size'],
+            plt.scatter(points['x'], points['y'], s = points['size'],
             c = points['color'], marker = points['marker'])
         elif(type(points) == list or type(points) == tuple):
             xs = []
@@ -187,5 +237,5 @@ class plot(filebase):
                         ms.append(point['marker'])
                     else:
                         ms = None
-            plt.scatter(x = xs, y = ys, s = ss, c = cs, marker = ms)
+            plt.scatter(xs, ys, s = ss, c = cs, marker = ms)
 # ----------------------------------------------------------------------------------------------------
