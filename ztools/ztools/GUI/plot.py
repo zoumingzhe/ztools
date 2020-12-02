@@ -162,8 +162,29 @@ class plot(filebase):
             plt.scatter(x = point['x'], y = point['y'], s = point['size'],
             c = point['color'], marker = point['marker'])
         elif(type(point) == list or type(point) == tuple):
+            xs = []
+            ys = []
+            ss = []
+            cs = []
+            ms = []
             for i in range(len(point)):
                 onepoint = point[i]
-                plt.scatter(x = onepoint['x'], y = onepoint['y'], s = onepoint['size'],
-                c = onepoint['color'], marker = onepoint['marker'])
+                xs.append(onepoint['x'])
+                ys.append(onepoint['y'])
+                if ss != None:
+                    if onepoint['size'] != None:
+                        ss.append(onepoint['size'])
+                    else:
+                        ss = None
+                if cs != None:
+                    if onepoint['color'] != None:
+                        cs.append(onepoint['color'])
+                    else:
+                        cs = None
+                if ms != None:
+                    if onepoint['marker'] != None:
+                        ms.append(onepoint['marker'])
+                    else:
+                        ms = None
+            plt.scatter(x = xs, y = ys, s = ss, c = cs, marker = ms)
 # ----------------------------------------------------------------------------------------------------
