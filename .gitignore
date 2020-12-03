@@ -2,4 +2,7 @@
 ztools/build/
 ztools/dist/
 ztools/ztools.egg-info/
+
 ztools/ztools/tool/__pycache__/
+
+test/ts_plot/
