@@ -19,6 +19,7 @@ for data
 """
 from ztools.data.filebase       import (filebase)
 from ztools.data.xls            import (xls)
+from ztools.data.hash           import (hash)
 
 
 """
