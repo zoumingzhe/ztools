@@ -15,10 +15,10 @@ from ztools.ds.base             import (queue, stack)
 
 
 """
-for file
+for data
 """
-from ztools.file.filebase       import (filebase)
-from ztools.file.xls            import (xls)
+from ztools.data.filebase       import (filebase)
+from ztools.data.xls            import (xls)
 
 
 """
