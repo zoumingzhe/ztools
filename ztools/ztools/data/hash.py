@@ -46,14 +46,15 @@ class hash():
         返回参数：
         说明：调用该方法将。
         """
-        h = hashlib.md5()
         with open(filename, 'rb') as f:
-            while True:
-                data = f.read(4096)
-                if not data:
-                    break
-                h.update(data)
-        return h.hexdigest()
+            h = hashlib.md5()
+            d = f.read(4096)
+            while d:
+                h.update(d)
+                d = f.read(4096)
+            f.close()
+            return h.hexdigest()
+        return None
 # ----------------------------------------------------------------------------------------------------
     def sha1(self, data):
         """
@@ -71,12 +72,13 @@ class hash():
         返回参数：
         说明：调用该方法将。
         """
-        h = hashlib.sha1()
         with open(filename, 'rb') as f:
-            while True:
-                data = f.read(4096)
-                if not data:
-                    break
-                h.update(data)
-        return h.hexdigest()
+            h = hashlib.sha1()
+            d = f.read(4096)
+            while d:
+                h.update(d)
+                d = f.read(4096)
+            f.close()
+            return h.hexdigest()
+        return None
 # ----------------------------------------------------------------------------------------------------
