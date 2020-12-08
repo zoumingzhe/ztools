@@ -39,6 +39,22 @@ class hash():
         """
         return hashlib.md5(data).hexdigest()
 # ----------------------------------------------------------------------------------------------------
+    def md5_file(self, filename):
+        """
+        md5计算：
+        输入参数：data 数据
+        返回参数：
+        说明：调用该方法将。
+        """
+        h = hashlib.md5()
+        with open(filename, 'rb') as f:
+            while True:
+                data = f.read(4096)
+                if not data:
+                    break
+                h.update(data)
+        return h.hexdigest()
+# ----------------------------------------------------------------------------------------------------
     def sha1(self, data):
         """
         md5计算：
@@ -47,4 +63,20 @@ class hash():
         说明：调用该方法将。
         """
         return hashlib.sha1(data).hexdigest()
+# ----------------------------------------------------------------------------------------------------
+    def sha1_file(self, filename):
+        """
+        md5计算：
+        输入参数：data 数据
+        返回参数：
+        说明：调用该方法将。
+        """
+        h = hashlib.sha1()
+        with open(filename, 'rb') as f:
+            while True:
+                data = f.read(4096)
+                if not data:
+                    break
+                h.update(data)
+        return h.hexdigest()
 # ----------------------------------------------------------------------------------------------------
