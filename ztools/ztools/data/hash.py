@@ -30,55 +30,57 @@ class hash():
             print("[ztools]-[hash]-[vesion:%s]" % self.__version)
         return self.__version
 # ----------------------------------------------------------------------------------------------------
-    def md5(self, data):
+    def md5(self, data = None, encoding = None, filename = None):
         """
         md5计算：
         输入参数：data 数据
         返回参数：
         说明：调用该方法将。
         """
-        return hashlib.md5(data).hexdigest()
+        x = type(data)
+        if x is bytes:
+            return hashlib.md5(data).hexdigest()
+        elif x is str:
+            return hashlib.md5(data.encode(encoding)).hexdigest()
+        elif type(filename) is str:
+            try:
+                with open(filename, 'rb') as f:
+                    h = hashlib.md5()
+                    d = f.read(4096)
+                    while d:
+                        h.update(d)
+                        d = f.read(4096)
+                    f.close()
+                    return h.hexdigest()
+            except:
+                return None
+        else:
+            return None
 # ----------------------------------------------------------------------------------------------------
-    def md5_file(self, filename):
+    def sha1(self, data = None, encoding = None, filename = None):
         """
-        md5计算：
+        sha1计算：
         输入参数：data 数据
         返回参数：
         说明：调用该方法将。
         """
-        with open(filename, 'rb') as f:
-            h = hashlib.md5()
-            d = f.read(4096)
-            while d:
-                h.update(d)
-                d = f.read(4096)
-            f.close()
-            return h.hexdigest()
-        return None
-# ----------------------------------------------------------------------------------------------------
-    def sha1(self, data):
-        """
-        md5计算：
-        输入参数：data 数据
-        返回参数：
-        说明：调用该方法将。
-        """
-        return hashlib.sha1(data).hexdigest()
-# ----------------------------------------------------------------------------------------------------
-    def sha1_file(self, filename):
-        """
-        md5计算：
-        输入参数：data 数据
-        返回参数：
-        说明：调用该方法将。
-        """
-        with open(filename, 'rb') as f:
-            h = hashlib.sha1()
-            d = f.read(4096)
-            while d:
-                h.update(d)
-                d = f.read(4096)
-            f.close()
-            return h.hexdigest()
-        return None
+        x = type(data)
+        if x is bytes:
+            return hashlib.sha1(data).hexdigest()
+        elif x is str:
+            return hashlib.sha1(data.encode(encoding)).hexdigest()
+        elif type(filename) is str:
+            try:
+                with open(filename, 'rb') as f:
+                    h = hashlib.sha1()
+                    d = f.read(4096)
+                    while d:
+                        h.update(d)
+                        d = f.read(4096)
+                    f.close()
+                    return h.hexdigest()
+            except:
+                return None
+        else:
+            return None
 # ----------------------------------------------------------------------------------------------------
