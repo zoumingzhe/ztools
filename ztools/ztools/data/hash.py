@@ -8,13 +8,14 @@
 # ----------------------------------------------------------------------------------------------------
 # MAP：
 # 已测试 | Version(self, ...)           | 版本显示
-# 未测试 | md5(self, ...)               | 读
+# 已测试 | md5(self, ...)               | 计算md5值
+# 已测试 | sha1(self, ...)              | 计算sha1值
 # ----------------------------------------------------------------------------------------------------
 import hashlib
 # ----------------------------------------------------------------------------------------------------
 class hash():
     """
-    hash类提供了对.xls文件的操作。
+    hash类提供了哈希值计算接口。
     """
     def __init__(self):
         self.__version = "0.1"
@@ -35,7 +36,7 @@ class hash():
         md5计算：
         输入参数：data 数据
         返回参数：
-        说明：调用该方法将。
+        说明：调用该方法将返回md5计算值。
         """
         x = type(data)
         if x is bytes:
@@ -54,6 +55,8 @@ class hash():
                     return h.hexdigest()
             except:
                 return None
+        elif not data and not filename:
+            return hashlib.md5()
         else:
             return None
 # ----------------------------------------------------------------------------------------------------
@@ -62,7 +65,7 @@ class hash():
         sha1计算：
         输入参数：data 数据
         返回参数：
-        说明：调用该方法将。
+        说明：调用该方法将返回sha1计算值。
         """
         x = type(data)
         if x is bytes:
@@ -81,6 +84,8 @@ class hash():
                     return h.hexdigest()
             except:
                 return None
+        elif not data and not filename:
+            return hashlib.sha1()
         else:
             return None
 # ----------------------------------------------------------------------------------------------------
