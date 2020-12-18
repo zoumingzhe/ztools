@@ -243,7 +243,7 @@ class plot(filebase):
         说明：调用该方法将绘制折线图。
         参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot
         """
-        plt.plot(x = x, y = y)
+        plt.plot(x, y)
 # ----------------------------------------------------------------------------------------------------
     def xyscatter(self, x, y, size = None, color = None, marker = None):
         """
