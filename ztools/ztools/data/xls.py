@@ -98,23 +98,40 @@ class xls(filebase):
     def WriteObjMulti(self, xls_file, sheet_name, obj, width_auto = True):
         # 创建Workbook对象
         book = xlwt.Workbook(encoding='utf-8', style_compression=0)
-        for n in range(len(sheet_name)):
-            # 创建sheet对象
-            sheet = book.add_sheet(sheet_name[n], cell_overwrite_ok=True)
-            # 写数据
+        x = type(sheet_name)
+        if x is list or x is tuple:
+            for n in range(len(sheet_name)):
+                # 创建sheet对象
+                sheet = book.add_sheet(sheet_name[n], cell_overwrite_ok=True)
+                # 写数据
+                cwidth = []
+                for r in range(len(obj[n])):
+                    for c in range(len(obj[n][r])):
+                        sheet.write(r, c, obj[n][r][c])
+                        if width_auto == True:
+                            # 宽度自适应
+                            awidth = len(str(obj[n][r][c]).encode('gbk'))
+                            if c >= len(cwidth):
+                                cwidth.append(0)
+                                sheet.col(c).width = 325
+                            if awidth > cwidth[c]:
+                                cwidth[c] = awidth
+                                sheet.col(c).width = 325 * cwidth[c]
+        else:
+            sheet = book.add_sheet(sheet_name, cell_overwrite_ok=True)
             cwidth = []
-            for i in range(len(obj[n])):
-                for j in range(len(obj[n][i])):
-                    sheet.write(i, j, obj[n][i][j])
+            for r in range(len(obj)):
+                for c in range(len(obj[r])):
+                    element = obj[r][c]
+                    sheet.write(r, c, element)
                     if width_auto == True:
-                        # 宽度自适应
-                        awidth = len(str(obj[n][i][j]).encode('gbk'))
-                        if j >= len(cwidth):
+                        awidth = len(str(element).encode('gbk'))
+                        if c >= len(cwidth):
                             cwidth.append(0)
-                            sheet.col(j).width = 325
-                        if awidth > cwidth[j]:
-                            cwidth[j] = awidth
-                            sheet.col(j).width = 325 * cwidth[j]
+                            sheet.col(c).width = 325
+                        if awidth > cwidth[c]:
+                            cwidth[c] = awidth
+                            sheet.col(c).width = 325 * cwidth[c]
         # 保存
         self.WriteFile(book, xls_file)
 # ----------------------------------------------------------------------------------------------------

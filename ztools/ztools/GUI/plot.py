@@ -4,11 +4,12 @@
 # 类 plot
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
-# 2020-12-xx | Zou Mingzhe   | Ver0.8  | 1.增加 sub(self, subtitle)
-#            |               |         | 2.增加 xyscatter(self, x, y, size = None, color = None, marker = None)
-#            |               |         | 3.增加 xyplot(self, x, y, color = None, linewidth = None, label = None)
-#            |               |         | 4.增加 xybar(self, x, y, color = None, align = None)
-#            |               |         | 5.增加 pie(self, )
+# 2020-12-xx | Zou Mingzhe   | Ver0.8  | 1.增加 subplot(self, subtitle)
+#            |               |         | 2.增加 subplots(self)
+#            |               |         | 3.增加 xyscatter(self, x, y, size = None, color = None, marker = None)
+#            |               |         | 4.增加 xyplot(self, x, y, color = None, linewidth = None, label = None)
+#            |               |         | 5.增加 xybar(self, x, y, color = None, align = None)
+#            |               |         | 6.增加 pie(self, )
 # 2020-12-02 | Zou Mingzhe   | Ver0.7  | 1.优化 scatter(self, points)，多点绘制性能
 #            |               |         | 2.增加 points(self, x, y, size = None, color = None, marker = None)
 # 2019-04-20 | Zou Mingzhe   | Ver0.6  | 1.修改 scatter(self, points)，输入的points类型支持list或者tuple
@@ -35,7 +36,8 @@
 # 已测试 | label(self, ...)             | 添加坐标轴标签
 # 已测试 | title(self, ...)             | 添加标题
 # 已测试 | grid(self)                   | 绘制网格线
-# 已测试 | sub(self)                    | 绘制子图
+# 未测试 | subplot(self)                | 绘制子图
+# 未测试 | subplots(self)               | 绘制子图
 # 已测试 | point(self, ...)             | 获取一个点对象
 # 已测试 | points(self, ...)            | 获取多个点对象
 # 已测试 | pie(self, ...)               | 绘制饼图
@@ -60,7 +62,7 @@ class plot(filebase):
     1、https://matplotlib.org/api/pyplot_summary.html
     """
     def __init__(self):
-        self.__version = "0.7"
+        self.__version = "0.8"
         self.__figure  = None
         plt.rcParams['font.sans-serif']=['SimHei']  # 用来正常显示中文标签
         plt.rcParams['axes.unicode_minus']=False    # 用来正常显示负号
@@ -86,7 +88,7 @@ class plot(filebase):
         说明：调用该方法将创建绘图对象。
         参考：https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure
         """
-        self.__figure  = plt.figure(num = id, figsize = figsize, dpi = dpi,\
+        return self.__figure  = plt.figure(num = id, figsize = figsize, dpi = dpi,\
             facecolor = facecolor, edgecolor = edgecolor,\
             frameon = frameon, clear = clear)
 # ----------------------------------------------------------------------------------------------------
@@ -96,7 +98,7 @@ class plot(filebase):
         输入参数：
         返回参数：
         说明：调用该方法将关闭绘图对象并释放内存。
-        参考：
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.close.html#matplotlib.pyplot.close
         """
         plt.close()
 # ----------------------------------------------------------------------------------------------------
@@ -106,7 +108,7 @@ class plot(filebase):
         输入参数：
         返回参数：
         说明：调用该方法将显示绘图figure。
-        参考：
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show
         """
         self.__figure.show()
 # ----------------------------------------------------------------------------------------------------
@@ -167,9 +169,9 @@ class plot(filebase):
         输入参数：title 标题
         返回参数：
         说明：调用该方法给绘图添加标题，支持中文。
-        参考：
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html#matplotlib.pyplot.title
         """
-        plt.title(title)
+        return plt.title(title)
 # ----------------------------------------------------------------------------------------------------
     def axis(self):
         """
@@ -177,7 +179,7 @@ class plot(filebase):
         输入参数：
         返回参数：
         说明：调用该方法将在绘图figure上绘制坐标轴。
-        参考：
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.axis.html#matplotlib.pyplot.axis
         """
         # plt.axis["xzero"].set_visible(True)
         # plt.axis["xzero"].label.set_text("新建y=0坐标")
@@ -189,19 +191,29 @@ class plot(filebase):
         输入参数：
         返回参数：
         说明：调用该方法将在绘图figure上绘制网格线。
-        参考：
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.grid.html#matplotlib.pyplot.grid
         """
-        plt.grid(True)
+        return plt.grid(True)
 # ----------------------------------------------------------------------------------------------------
-    def sub(self, subtitle):
+    def subplot(self, subtitle):
         """
         绘制子图：
         输入参数：subtitle 子图标题
         返回参数：
         说明：调用该方法绘制子图。
-        参考：
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot
         """
-        plt.subplot(subtitle)
+        return plt.subplot(subtitle)
+# ----------------------------------------------------------------------------------------------------
+    def subplots(self, nrows=1, ncols=1):
+        """
+        绘制子图：
+        输入参数：
+        返回参数：
+        说明：调用该方法绘制子图。
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots
+        """
+        return plt.subplots(nrows = nrows, ncols = ncols)
 # ----------------------------------------------------------------------------------------------------
     def point(self, x, y, size = None, color = None, marker = None):
         """
