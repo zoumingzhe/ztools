@@ -18,15 +18,15 @@ except ImportError:
 setup(
     name="ztools",
     description="ToolBox for Python, Easy to Use.",
-    version="2.1.12",
+    version="2.1.13",
     author="Zou Mingzhe",
     author_email="zoumingzhe@qq.com",
     url="https://github.com/zoumingzhe/ztools",
     packages=[
         'ztools',
+        'ztools.data',
         'ztools.db',
         'ztools.ds',
-        'ztools.file',
         'ztools.GUI',
         'ztools.tool',
     ],
