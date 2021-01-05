@@ -48,9 +48,9 @@
 # ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
-from   ztools        import filebase
+from ..data.fbasic import fbasic
 # ----------------------------------------------------------------------------------------------------
-class plot(filebase):
+class plot(fbasic):
     """
     plot类提供了绘图功能，它是基于matplotlib的，同时也是matplotlib的增强。
     只需要几行代码即可获得绘制图形，大大缩减了绘图的代码行数，获得高质量的编程体验。
@@ -88,9 +88,10 @@ class plot(filebase):
         说明：调用该方法将创建绘图对象。
         参考：https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure
         """
-        return self.__figure  = plt.figure(num = id, figsize = figsize, dpi = dpi,\
+        self.__figure = plt.figure(num = id, figsize = figsize, dpi = dpi,\
             facecolor = facecolor, edgecolor = edgecolor,\
             frameon = frameon, clear = clear)
+        return self.__figure
 # ----------------------------------------------------------------------------------------------------
     def close(self):
         """

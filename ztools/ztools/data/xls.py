@@ -16,11 +16,11 @@
 # 未测试 | WriteObj(self, ...)          | 写
 # 未测试 | WriteObjMulti(self, ...)     | 写
 # ----------------------------------------------------------------------------------------------------
-from ztools import filebase
+from .fbasic import fbasic
 import xlrd
 import xlwt
 # ----------------------------------------------------------------------------------------------------
-class xls(filebase):
+class xls(fbasic):
     """
     xls类提供了对.xls文件的操作。
     """

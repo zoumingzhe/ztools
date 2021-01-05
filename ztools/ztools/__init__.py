@@ -1,6 +1,14 @@
 # Copyright (c) 2018-2020 ZouMingzhe <zoumingzhe@qq.com>
 # This module is part of the ztools package, which is released under a MIT licence.
 
+
+"""
+for data
+"""
+from ztools.data.fbasic         import (fbasic)
+from ztools.data.xls            import (xls)
+from ztools.data.hash           import (hash)
+
 """
 for database
 """
@@ -11,15 +19,8 @@ from ztools.db.SQLite           import (SQLite)
 """
 for data structure
 """
-from ztools.ds.base             import (queue, stack)
-
-
-"""
-for data
-"""
-from ztools.data.filebase       import (filebase)
-from ztools.data.xls            import (xls)
-from ztools.data.hash           import (hash)
+from ztools.ds.tqueue           import (tqueue)
+from ztools.ds.tstack           import (tstack)
 
 
 """
