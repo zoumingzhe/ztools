@@ -24,9 +24,9 @@ from ztools.ds.tstack           import (tstack)
 
 
 """
-for GUI
+for gui
 """
-from ztools.GUI.plot            import (plot)
+from ztools.gui.plot            import (plot)
 
 
 """
