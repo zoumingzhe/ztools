@@ -42,5 +42,3 @@ plt.imshow(image)
 plt.close()
 
 input("按回车（Enter）继续")
-
-
