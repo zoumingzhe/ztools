@@ -5,4 +5,6 @@ ztools/ztools.egg-info/
 
 ztools/ztools/tool/__pycache__/
 
+example/ex_plot/
+
 test/ts_plot/
