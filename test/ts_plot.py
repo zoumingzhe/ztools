@@ -1,20 +1,20 @@
 import sys
-sys.path.append(r'..\ztools\ztools')
-from file.filebase import filebase
-from tool.timeout import timeout
-from GUI.plot import plot
+sys.path.insert(0, r'..\ztools')
+from ztools.gui.plot import plot
+from ztools.data.fbasic import fbasic
+from ztools.tool.timeout import timeout
 
 # 参考：
 # https://matplotlib.org/api/pyplot_summary.html
 
-fb = filebase()
+fb = fbasic()
 fb.ensure('.\\ts_plot')
 
 plt = plot()
 plt.Version(isShow = True)
 plt.figure('测试Plot（scatter）')
 plt.title('测试Plot')
-plt.sub(121)
+plt.subplot(121)
 plt.title('scatter')
 plt.label(xlabel='日期', ylabel='时间')
 points = []
@@ -23,7 +23,7 @@ points.append(plt.point('星期二', '14:30', 20))
 points.append(plt.point('星期三', '15:00', 30))
 points.append(plt.point('星期四', '16:00', 40))
 plt.scatter(points)
-plt.sub(122)
+plt.subplot(122)
 plt.title('xyscatter')
 plt.label(xlabel='x轴', ylabel='y轴')
 x = [1, 1, 2, 2]
