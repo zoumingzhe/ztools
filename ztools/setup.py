@@ -18,7 +18,7 @@ except ImportError:
 setup(
     name="ztools",
     description="ToolBox for Python, Easy to Use.",
-    version="2.2.4",
+    version="2.2.5",
     author="Zou Mingzhe",
     author_email="zoumingzhe@qq.com",
     url="https://github.com/zoumingzhe/ztools",
@@ -33,6 +33,7 @@ setup(
     license="MIT",
     long_description=open('..\README.rst', mode='r', encoding='UTF-8').read(),
     install_requires=[
+        'colorama',
         'matplotlib',
         'pymysql',
         'xlrd',

@@ -34,4 +34,4 @@ for tool
 """
 from .tool.progressbar      import (progressbar)
 from .tool.timeout          import (timeout)
-from .tool.tprint           import (tprint)
+from .tool.tprint           import (AnsiStyle, AnsiFore, AnsiBack, tprint)
