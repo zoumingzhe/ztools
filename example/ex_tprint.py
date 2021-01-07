@@ -1,9 +1,7 @@
-import sys
-sys.path.insert(0, r'..\ztools')
-from ztools.tool.tprint import tprint
-from ztools.tool.tprint import AnsiStyle as style
-from ztools.tool.tprint import AnsiFore as fore
-from ztools.tool.tprint import AnsiBack as back
+from ztools import tprint
+from ztools import AnsiStyle as style
+from ztools import AnsiFore as fore
+from ztools import AnsiBack as back
 
 tp = tprint()
 
@@ -39,4 +37,35 @@ tp.flush()
 tp.color(123)
 tp.flush()
 
+print("-----")
+tp.color((1,2,3), fore.red, back.white)
+tp.flush()
+tp.color((1,2,3), fore.red)
+tp.flush()
+tp.color((1,2,3), back.white)
+tp.flush()
+tp.color((1,2,3))
+tp.flush()
+
+print("-----")
+tp.color([1,2,3], fore.red, back.white)
+tp.flush()
+tp.color([1,2,3], fore.red)
+tp.flush()
+tp.color([1,2,3], back.white)
+tp.flush()
+tp.color([1,2,3])
+tp.flush()
+
+print("-----")
+tp.color({'k1':1, 'k2':2, 'k3':3}, fore.red, back.white)
+tp.flush()
+tp.color({'k1':1, 'k2':2, 'k3':3}, fore.red)
+tp.flush()
+tp.color({'k1':1, 'k2':2, 'k3':3}, back.white)
+tp.flush()
+tp.color({'k1':1, 'k2':2, 'k3':3})
+tp.flush()
+
 input("按回车（Enter）继续")
+
