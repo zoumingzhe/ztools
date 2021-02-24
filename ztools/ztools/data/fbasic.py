@@ -153,46 +153,74 @@ class fbasic:
         """
         拷贝文件：
         输入参数：srcfile 源文件路径，dstfile 目的文件路径
-        返回参数：
+        返回参数：True 成功， False 失败
         说明：调用该方法将文件从源路径拷贝到目的路径。
         """
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
-        else:
+            return False
+        try:
             fpath=os.path.dirname(dstfile)    #分离文件名和路径
             if not os.path.exists(fpath):
                 os.makedirs(fpath)                #创建路径
             shutil.copyfile(srcfile,dstfile)      #复制文件
-            print(" copy %s \r\n to-> %s" % ( srcfile, dstfile ) )
+        except Exception as e:
+            return False
+        print(" copy %s \r\n to-> %s" % ( srcfile, dstfile ) )
+        return True
 # ----------------------------------------------------------------------------------------------------
     def move(self, srcfile, dstfile):
         """
         移动文件：
         输入参数：srcfile 源文件路径，dstfile 目的文件路径
-        返回参数：
+        返回参数：True 成功， False 失败
         说明：调用该方法将文件从源路径移动到目的路径。
         """
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
-        else:
+            return False
+        try:
             fpath=os.path.dirname(dstfile)    #分离文件名和路径
             if not os.path.exists(fpath):
                 os.makedirs(fpath)                #创建路径
             shutil.move(srcfile,dstfile)          #移动文件
-            print(" move %s \r\n to-> %s" % ( srcfile, dstfile ) )
+        except Exception as e:
+            return False
+        print(" move %s \r\n to-> %s" % ( srcfile, dstfile ) )
+        return True
+# ----------------------------------------------------------------------------------------------------
+    def rename(self, srcfile, dstfile):
+        """
+        重命名文件：
+        输入参数：srcfile 源文件路径，dstfile 重命名文件路径
+        返回参数：True 成功， False 失败
+        说明：调用该方法将文件重命名。
+        """
+        if not os.path.isfile(srcfile):
+            print("%s not exist!"%(srcfile))
+            return False
+        try:
+            os.rename(srcFile,dstFile)
+        except Exception as e:
+            return False
+        return True
 # ----------------------------------------------------------------------------------------------------
     def delete(self, srcfile):
         """
         删除文件：
         输入参数：srcfile 源文件路径
-        返回参数：
+        返回参数：True 成功， False 失败
         说明：调用该方法将文件从源路径删除。
         """
         if not os.path.isfile(srcfile):
             print("%s not exist!"%(srcfile))
-        else:
-            os.remove(srcfile)
-            print("delete %s"%( srcfile))
+            return False
+        try:
+            s.remove(srcfile)
+        except Exception as e:
+            return False
+        print("delete %s"%( srcfile))
+        return True
 # ----------------------------------------------------------------------------------------------------
     def archive(self, srcdir, dstdir = None, buname = None, format = "zip"):
         """
@@ -201,12 +229,13 @@ class fbasic:
                  dstdir = None   归档路径，不包括文件名，不指定时默认归档到同级文件夹下
                  buname = None   归档文件名，不包含后缀，不指定时默认使用“backup_文件夹名”作为文件名
                  format = "zip"  归档格式（zip、tar、bztar、gztar），默认使用zip
-        返回参数：
+        返回参数：True 成功， False 失败
         说明：调用该方法将文件归档至指定目录下。
         """
         if not os.path.exists(srcdir):
             print("%s not exist!"%(srcdir))
-        else:
+            return False
+        try:
             if buname == None:
                 buname = "backup_" + self.get_name(srcdir)
             if dstdir == None:
@@ -214,19 +243,26 @@ class fbasic:
             self.ensure(dstdir)
             dstdir = self.get_path(dstdir, buname)
             shutil.make_archive(dstdir, format, srcdir)
+        except Exception as e:
+            return False
+        return True
 # ----------------------------------------------------------------------------------------------------
     def archive_unpack(self, srcpath, dstpath = None):
         """
         归档文件释放：
         输入参数：srcpath          需要释放的归档文件路径，包含文件名及后缀
                  dstpath = None   释放路径，不指定时默认释放到同级文件夹下
-        返回参数：
+        返回参数：True 成功， False 失败
         说明：调用该方法将归档文件释放至指定目录下。
         """
         if not os.path.isfile(srcpath):
             print("%s not exist!"%(srcpath))
-        else:
+            return False
+        try:
             if dstpath == None:
                 dstpath = self.get_folder(srcpath)
             shutil.unpack_archive(srcpath, dstpath)
+        except Exception as e:
+            return False
+        return True
 # ----------------------------------------------------------------------------------------------------
