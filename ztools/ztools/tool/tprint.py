@@ -109,9 +109,30 @@ class tprint:
     timeout类提供了计时和超时判断功能，它通过调用系统time模块来获取时间。
     """
     def __init__(self):
+        # print("%s init"%(self.__class__.__name__))
         self.__version = "0.1"
         self.__string = ""
         colorinit(autoreset=True)
+# ----------------------------------------------------------------------------------------------------
+    @staticmethod
+    def std(*args):
+        """
+        输出至std：
+        输入参数：*args
+        返回参数：无
+        说明：调用该方法将string输出至std，该方法具有多线程并发控制。
+        """
+        string = ""
+        for item in args:
+            if string:
+                string = string + " "
+            if type(item) is not str:
+                string = string + str(item)
+            else:
+                string = string + item
+        if string:
+            string = string + "\n"
+            print(string, end="")
 # ----------------------------------------------------------------------------------------------------
     def flush(self):
         """
@@ -121,7 +142,8 @@ class tprint:
         说明：调用该方法将刷出缓冲区。
         """
         if self.__string:
-            print(self.__string)
+            self.__string = self.__string + "\n"
+            print(self.__string, end="")
             self.__string = ""
 # ----------------------------------------------------------------------------------------------------
     def color(self, string, *args):
