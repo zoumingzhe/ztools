@@ -29,11 +29,11 @@ class progressbar:
         self.__maxlength = 0
         self.__barlist = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█', '█']
 # ----------------------------------------------------------------------------------------------------
-    def percent(self, progress, show = False):
+    def percent(self, progress, title = None, show = False):
         """
         百分比进度条：
         输入参数：progress, show = False
-        返回参数：strbar
+        返回参数：string
         说明：调用该方法将返回百分比进度条，百分比进度条 = 百分比 + 进度条。progress必须介于0至1之间。
         """
         progress = progress * 100
@@ -42,18 +42,19 @@ class progressbar:
         elif(progress < 0):
             progress = 0
         self.__progress = progress
-        strbar = str('%.2f%% %s' % (progress, '█'*int(progress / 10) + self.__barlist[int(progress) % 10]))
-        self.__maxlength = max(len(strbar), self.__maxlength)
+        strbar = '█'*int(progress / 10) + self.__barlist[int(progress) % 10]
+        string = (str('%s:'%title) if title else '') + str('%.2f%% %s' % (progress, strbar))
+        self.__maxlength = max(len(string), self.__maxlength)
         if(show):
-            sys.stdout.write(strbar + '\r')
+            sys.stdout.write(string + '\r')
             sys.stdout.flush()
-        return strbar
+        return string
 # ----------------------------------------------------------------------------------------------------
-    def number(self, done, sum, show = False):
+    def number(self, done, sum, title = None, show = False):
         """
         数字进度条：
         输入参数：done, sum, show = False
-        返回参数：strbar
+        返回参数：string
         说明：调用该方法将返回数字进度条，数字进度条 = done/sum + 进度条。
         其中，done为已完成进度，sum为总进度。
         """
@@ -69,12 +70,13 @@ class progressbar:
         elif(progress < 0):
             progress = 0
         self.__progress = progress
-        strbar = str('%.2f%% (%d/%d) %s' % (progress, sum, done, '█'*int(progress / 10) + self.__barlist[int(progress) % 10]))
-        self.__maxlength = max(len(strbar), self.__maxlength)
+        strbar = '█'*int(progress / 10) + self.__barlist[int(progress) % 10]
+        string = (str('%s:'%title) if title else '') + str('%.2f%% (%d/%d) %s' % (progress, sum, done, strbar))
+        self.__maxlength = max(len(string), self.__maxlength)
         if(show):
-            sys.stdout.write(strbar + '\r')
+            sys.stdout.write(string + '\r')
             sys.stdout.flush()
-        return strbar
+        return string
 # ----------------------------------------------------------------------------------------------------
     def EOF(self, clear = False):
         """
