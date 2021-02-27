@@ -4,15 +4,17 @@
 # 类 progressbar
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
-# 2019-05-03 | Zou Mingzhe   | Ver0.2  | 1.增加 EOF(self, isClean = False)
+# 2021-02-27 | Zou Mingzhe   | Ver0.3  | 1.删除 Version(self, isShow = False)
+#            |               |         | 2.修改 Percent(self, ...) 为 percent(self, ...)
+#            |               |         | 3.修改 Number(self, ...)  为 number(self, ...)
+# 2019-05-03 | Zou Mingzhe   | Ver0.2  | 1.增加 EOF(self, clear = False)
 #            |               |         | 2.修改 PercentProgressBar(self, ...) 为 Percent(self, ...)
 #            |               |         | 3.修改 NumberProgressBar(self, ...)  为 Number(self, ...)
 # 2018-09-05 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
-# 已测试 | Version(self, ...)           | 版本显示
-# 已测试 | Percent(self, ...)           | 百分比进度条
-# 已测试 | Number(self, ...)            | 数字进度条
+# 已测试 | percent(self, ...)           | 百分比进度条
+# 已测试 | number(self, ...)            | 数字进度条
 # 已测试 | EOF(self, ...)               | 结束符
 # ----------------------------------------------------------------------------------------------------
 import sys
@@ -22,83 +24,66 @@ class progressbar:
     progressbar类提供了进度条字符串。
     """
     def __init__(self):
-        self.__version = "0.2"
+        self.__version = "0.3"
         self.__progress = 0
         self.__maxlength = 0
-        self.__progressbarlist = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█', '█']
+        self.__barlist = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█', '█']
 # ----------------------------------------------------------------------------------------------------
-    def Version(self, isShow = False):
-        """
-        版本显示：
-        输入参数：isShow = False
-        返回参数：self.__version
-        说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
-        """
-        if(isShow):
-            print("[ztools]-[progressbar]-[vesion:%s]" % self.__version)
-        return self.__version
-# ----------------------------------------------------------------------------------------------------
-    def Percent(self, progress, isShow = False):
+    def percent(self, progress, show = False):
         """
         百分比进度条：
-        输入参数：progress, isShow = False
-        返回参数：strprogressbar
+        输入参数：progress, show = False
+        返回参数：strbar
         说明：调用该方法将返回百分比进度条，百分比进度条 = 百分比 + 进度条。progress必须介于0至1之间。
         """
         progress = progress * 100
         if(progress > 100):
             progress = 100
         elif(progress < 0):
-            progress = 0        
-        strprogressbar = str('%.2f%% ' % progress)
+            progress = 0
         self.__progress = progress
-        for n in range(int(progress / 10)):
-            strprogressbar = strprogressbar + '█'
-        strprogressbar = strprogressbar + self.__progressbarlist[int(progress) % 10]
-        self.__maxlength = max(len(strprogressbar), self.__maxlength)
-        if(isShow):
-            sys.stdout.write(strprogressbar + '\r')
+        strbar = str('%.2f%% %s' % (progress, '█'*int(progress / 10) + self.__barlist[int(progress) % 10]))
+        self.__maxlength = max(len(strbar), self.__maxlength)
+        if(show):
+            sys.stdout.write(strbar + '\r')
             sys.stdout.flush()
-        return strprogressbar
+        return strbar
 # ----------------------------------------------------------------------------------------------------
-    def Number(self, Done, Sum, isShow = False):
+    def number(self, done, sum, show = False):
         """
         数字进度条：
-        输入参数：Done, Sum, isShow = False
-        返回参数：strprogressbar
-        说明：调用该方法将返回数字进度条，数字进度条 = Done/Sum + 进度条。
-        其中，Done为已完成进度，Sum为总进度。
+        输入参数：done, sum, show = False
+        返回参数：strbar
+        说明：调用该方法将返回数字进度条，数字进度条 = done/sum + 进度条。
+        其中，done为已完成进度，sum为总进度。
         """
-        if(Sum <= 0):
-            Sum = 1
-        if(Done < 0):
-            Done = 0
-        if(Done > Sum):
-            Done = Sum
-        progress = Done * 100 / Sum
+        if(sum <= 0):
+            sum = 1
+        if(done < 0):
+            done = 0
+        if(done > sum):
+            done = sum
+        progress = done * 100 / sum
         if(progress > 100):
             progress = 100
         elif(progress < 0):
-            progress = 0        
-        strprogressbar = str('%d/%d ' % (Done, Sum))
+            progress = 0
         self.__progress = progress
-        for n in range(int(progress / 10)):
-            strprogressbar = strprogressbar + '█'
-        strprogressbar = strprogressbar + self.__progressbarlist[int(progress) % 10]
-        self.__maxlength = max(len(strprogressbar), self.__maxlength)
-        if(isShow):
-            sys.stdout.write(strprogressbar + '\r')
+        strbar = str('%.2f%% (%d/%d) %s' % (progress, sum, done, '█'*int(progress / 10) + self.__barlist[int(progress) % 10]))
+        self.__maxlength = max(len(strbar), self.__maxlength)
+        if(show):
+            sys.stdout.write(strbar + '\r')
             sys.stdout.flush()
-        return strprogressbar
+        return strbar
 # ----------------------------------------------------------------------------------------------------
-    def EOF(self, isClean = False):
+    def EOF(self, clear = False):
         """
         结束符：
-        输入参数：isClean = False
+        输入参数：clear = False
         返回参数：
         说明：调用该方法将换行或清空屏幕进度条。
         """
-        if(isClean):
+        if(clear):
             for n in range(self.__maxlength):
                 sys.stdout.write(' ')
                 sys.stdout.flush()
