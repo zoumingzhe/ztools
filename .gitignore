@@ -8,3 +8,8 @@ ztools/ztools/tool/__pycache__/
 example/ex_plot/
 
 test/ts_plot/
+test/ts_fbasic/backup/
+test/ts_fbasic/backup_folder1/
+test/ts_fbasic/backup1.tar
+test/ts_fbasic/backup1.zip
+test/ts_fbasic/backup_folder1.zip
