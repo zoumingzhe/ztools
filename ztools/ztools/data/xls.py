@@ -8,7 +8,6 @@
 # 2019-04-14 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
-# 已测试 | Version(self, ...)           | 版本显示
 # 未测试 | ReadInfo(self, ...)          | 读
 # 未测试 | ReadObj(self, ...)           | 读
 # 未测试 | ReadObjMulti(self, ...)      | 读
@@ -27,24 +26,15 @@ class xls(fbasic):
     def __init__(self):
         self.__version = "0.2"
 # ----------------------------------------------------------------------------------------------------
-    def Version(self, isShow = False):
-        """
-        版本显示：
-        输入参数：isShow = False
-        返回参数：self.__version
-        说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
-        """
-        if(isShow):
-            print("[ztools]-[xls]-[vesion:%s]" % self.__version)
-        return self.__version
-# ----------------------------------------------------------------------------------------------------
-    def ReadInfo(self, xls_file):
+    @staticmethod
+    def ReadInfo(xls_file):
         book = xlrd.open_workbook(xls_file)
         sheets = book.sheet_names()
         info = sheets
         return info
 # ----------------------------------------------------------------------------------------------------
-    def ReadObj(self, xls_file, sheet_index):
+    @staticmethod
+    def ReadObj(xls_file, sheet_index):
         book = xlrd.open_workbook(xls_file)
         sheet0 = book.sheet_by_index(sheet_index)
         nrows = sheet0.nrows
@@ -53,7 +43,8 @@ class xls(fbasic):
             info.append(sheet0.row_values(i))
         return info
 # ----------------------------------------------------------------------------------------------------
-    def ReadObjMulti(self, xls_file):
+    @staticmethod
+    def ReadObjMulti(xls_file):
         book = xlrd.open_workbook(xls_file)
         sheets = book.sheet_names()
         info = []
@@ -66,14 +57,16 @@ class xls(fbasic):
             info.append(ainfo)
         return info
 # ----------------------------------------------------------------------------------------------------
-    def WriteFile(self, book, path):
+    @staticmethod
+    def WriteFile(book, path):
         try:
-            self.ensure(self.get_folder(path))
+            fbasic.ensure(fbasic.get_folder(path))
             book.save(path)
         except:
             print("Excel文件\"%s\"保存失败，请检查路径是否正确、文件是否关闭！" % path)
 # ----------------------------------------------------------------------------------------------------
-    def WriteObj(self, xls_file, sheet_name, obj, width_auto = True):
+    @staticmethod
+    def WriteObj(xls_file, sheet_name, obj, width_auto = True):
         # 创建Workbook对象
         book = xlwt.Workbook(encoding='utf-8', style_compression=0)
         # 创建sheet对象
@@ -93,9 +86,10 @@ class xls(fbasic):
                         cwidth[j] = awidth
                         sheet.col(j).width = 325 * cwidth[j]
         # 保存
-        self.WriteFile(book, xls_file)
+        xls.WriteFile(book, xls_file)
 # ----------------------------------------------------------------------------------------------------
-    def WriteObjMulti(self, xls_file, sheet_name, obj, width_auto = True):
+    @staticmethod
+    def WriteObjMulti(xls_file, sheet_name, obj, width_auto = True):
         # 创建Workbook对象
         book = xlwt.Workbook(encoding='utf-8', style_compression=0)
         x = type(sheet_name)
@@ -133,5 +127,5 @@ class xls(fbasic):
                             cwidth[c] = awidth
                             sheet.col(c).width = 325 * cwidth[c]
         # 保存
-        self.WriteFile(book, xls_file)
+        xls.WriteFile(book, xls_file)
 # ----------------------------------------------------------------------------------------------------
