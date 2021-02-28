@@ -69,7 +69,8 @@ class fbasic:
             return self.__path[key] # TODO：检查key是否在dict内
         return self.__path
 # ----------------------------------------------------------------------------------------------------
-    def ensure(self, path, isCreate = True):
+    @staticmethod
+    def ensure(path, isCreate = True):
         """
         路径检查：
         输入参数：path, isCreate = True
@@ -80,7 +81,8 @@ class fbasic:
             os.makedirs(path)
         return os.path.exists(path)
 # ----------------------------------------------------------------------------------------------------
-    def get_path(self, folder, name):
+    @staticmethod
+    def get_path(folder, name):
         """
         获取路径：
         输入参数：folder, name
@@ -95,7 +97,8 @@ class fbasic:
         else:
             return (folder + '\\' + name)
 # ----------------------------------------------------------------------------------------------------
-    def get_name(self, filepath):
+    @staticmethod
+    def get_name(filepath):
         """
         获取文件名：
         输入参数：filepath
@@ -110,7 +113,8 @@ class fbasic:
         else:
             return os.path.basename(filepath)    #分离文件名和路径
 # ----------------------------------------------------------------------------------------------------
-    def get_folder(self, filepath):
+    @staticmethod
+    def get_folder(filepath):
         """
         获取文件夹名：
         输入参数：filepath
@@ -125,7 +129,8 @@ class fbasic:
         else:
             return os.path.dirname(filepath)    #分离文件名和路径
 # ----------------------------------------------------------------------------------------------------
-    def scan(self, directory, sub=False, prefix=None, postfix=None):
+    @staticmethod
+    def scan(directory, sub=False, prefix=None, postfix=None):
         """
         扫描文件：
         输入参数：directory, sub=False, prefix=None, postfix=None
@@ -149,7 +154,8 @@ class fbasic:
                     info.append(os.path.join(root,special_file))
         return info
 # ----------------------------------------------------------------------------------------------------
-    def copy(self, srcfile, dstfile):
+    @staticmethod
+    def copy(srcfile, dstfile):
         """
         拷贝文件：
         输入参数：srcfile 源文件路径，dstfile 目的文件路径
@@ -169,7 +175,8 @@ class fbasic:
         print(" copy %s \r\n to-> %s" % ( srcfile, dstfile ) )
         return True
 # ----------------------------------------------------------------------------------------------------
-    def move(self, srcfile, dstfile):
+    @staticmethod
+    def move(srcfile, dstfile):
         """
         移动文件：
         输入参数：srcfile 源文件路径，dstfile 目的文件路径
@@ -189,7 +196,8 @@ class fbasic:
         print(" move %s \r\n to-> %s" % ( srcfile, dstfile ) )
         return True
 # ----------------------------------------------------------------------------------------------------
-    def rename(self, srcfile, dstfile):
+    @staticmethod
+    def rename(srcfile, dstfile):
         """
         重命名文件：
         输入参数：srcfile 源文件路径，dstfile 重命名文件路径
@@ -205,7 +213,8 @@ class fbasic:
             return False
         return True
 # ----------------------------------------------------------------------------------------------------
-    def delete(self, srcfile):
+    @staticmethod
+    def delete(srcfile):
         """
         删除文件：
         输入参数：srcfile 源文件路径
@@ -222,7 +231,8 @@ class fbasic:
         print("delete %s"%( srcfile))
         return True
 # ----------------------------------------------------------------------------------------------------
-    def archive(self, srcdir, dstdir = None, buname = None, format = "zip"):
+    @staticmethod
+    def archive(srcdir, dstdir = None, buname = None, format = "zip"):
         """
         归档文件：
         输入参数：srcdir          需要归档的文件路径
@@ -237,17 +247,19 @@ class fbasic:
             return False
         try:
             if buname == None:
-                buname = "backup_" + self.get_name(srcdir)
+                buname = "backup_" + fbasic.get_name(srcdir)
             if dstdir == None:
-                dstdir = self.get_folder(srcdir)
-            self.ensure(dstdir)
-            dstdir = self.get_path(dstdir, buname)
+                dstdir = fbasic.get_folder(srcdir)
+            fbasic.ensure(dstdir)
+            dstdir = fbasic.get_path(dstdir, buname)
             shutil.make_archive(dstdir, format, srcdir)
         except Exception as e:
+            # print(e)
             return False
         return True
 # ----------------------------------------------------------------------------------------------------
-    def archive_unpack(self, srcpath, dstpath = None):
+    @staticmethod
+    def archive_unpack(srcpath, dstpath = None):
         """
         归档文件释放：
         输入参数：srcpath          需要释放的归档文件路径，包含文件名及后缀
@@ -260,9 +272,10 @@ class fbasic:
             return False
         try:
             if dstpath == None:
-                dstpath = self.get_folder(srcpath)
+                dstpath = fbasic.get_folder(srcpath)
             shutil.unpack_archive(srcpath, dstpath)
         except Exception as e:
+            # print(e)
             return False
         return True
 # ----------------------------------------------------------------------------------------------------
