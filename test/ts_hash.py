@@ -1,9 +1,7 @@
 import sys
 sys.path.append(r'..\ztools\ztools')
-from data.filebase import filebase
+from data.fbasic import fbasic
 from data.hash import hash
-
-hash = hash()
 
 print('**********md5**********')
 print(hash.md5())

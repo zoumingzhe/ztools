@@ -17,7 +17,6 @@
 # 2019-04-14 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
-# 已测试 | Version(self, ...)           | 版本显示
 # 已测试 | map(self, ...)               | 路径映射
 # 已测试 | ensure(self, ...)            | 路径检查
 # 已测试 | get_path(self, ...)          | 获取路径
@@ -41,17 +40,6 @@ class fbasic:
     def __init__(self):
         self.__version = "0.6"
         self.__path = {}
-# ----------------------------------------------------------------------------------------------------
-    def Version(self, isShow = False):
-        """
-        版本显示：
-        输入参数：isShow = False
-        返回参数：self.__version
-        说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
-        """
-        if(isShow):
-            print("[ztools]-[filebase]-[vesion:%s]" % self.__version)
-        return self.__version
 # ----------------------------------------------------------------------------------------------------
     def map(self, key = None, path = None):
         """
