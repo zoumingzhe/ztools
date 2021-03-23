@@ -213,7 +213,7 @@ class fbasic:
             print("%s not exist!"%(srcfile))
             return False
         try:
-            s.remove(srcfile)
+            os.remove(srcfile)
         except Exception as e:
             return False
         print("delete %s"%( srcfile))
