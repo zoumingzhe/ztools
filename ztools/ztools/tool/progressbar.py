@@ -71,7 +71,7 @@ class progressbar:
             progress = 0
         self.__progress = progress
         strbar = '█'*int(progress / 10) + self.__barlist[int(progress) % 10]
-        string = (str('%s:'%title) if title else '') + str('%.2f%% (%d/%d) %s' % (progress, sum, done, strbar))
+        string = (str('%s:'%title) if title else '') + str('%.2f%% (%d/%d) %s' % (progress, done, sum, strbar))
         self.__maxlength = max(len(string), self.__maxlength)
         if(show):
             sys.stdout.write(string + '\r')
