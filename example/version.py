@@ -18,4 +18,7 @@ xls().Version(isShow = True)
 # 显示 MySQL 版本号
 MySQL().Version(isShow = True)
 
+# 显示 SQLite 版本号
+SQLite().Version(isShow = True)
+
 input()
