@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # coding=utf-8
 # ----------------------------------------------------------------------------------------------------
-# 类 filebase
+# 类 fbasic
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2021-06-16 | Zou Mingzhe   | Ver0.7  | 1.修改 scan(self, ...) 支持扫描目录，返回元组并且有序
 # 2019-05-24 | Zou Mingzhe   | Ver0.6  | 1.增加 archive(self, srcdir, dstdir = None, name = None, format = "zip")
 #            |               |         | 2.增加 archive_unpack(self, srcpath, dstpath = None)
 #            |               |         | 3.测试以上2个函数，完善函数帮助信息
@@ -38,7 +39,7 @@ class fbasic:
     filebase类提供了对文件访问的操作。
     """
     def __init__(self):
-        self.__version = "0.6"
+        self.__version = "0.7"
         self.__path = {}
 # ----------------------------------------------------------------------------------------------------
     def map(self, key = None, path = None):
@@ -118,29 +119,36 @@ class fbasic:
             return os.path.dirname(filepath)    #分离文件名和路径
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def scan(directory, sub=False, prefix=None, postfix=None):
+    def scan(directory, sub=False, prefix=None, postfix=None, ret_dir=False, ret_file=True):
         """
         扫描文件：
-        输入参数：directory, sub=False, prefix=None, postfix=None
+        输入参数：directory, sub=False, prefix=None, postfix=None, ret_dir=False, ret_file=True
         返回参数：info
         说明：该方法在指定目录（directory）下进行文件扫描，
         参数sub指定是否对子目录扫描（默认不扫描），
-        参数prefix、postfix分别指定文件名的前缀和后缀。
+        参数prefix、postfix分别指定文件名的前缀和后缀，
+        参数ret_dir指定结果是否包含目录（默认不包含），
+        参数ret_file指定结果是否包含文件（默认包含）。
         """
         info = []
         for root, sub_dirs, files in os.walk(directory):
+            if ret_dir == True:
+                for sub_dir in sub_dirs:
+                    info.append(os.path.join(root,sub_dir))
+            if ret_file == True:
+                for special_file in files:
+                    if postfix:
+                        if special_file.endswith(postfix):
+                            info.append(os.path.join(root,special_file))
+                    elif prefix:
+                        if special_file.startswith(prefix):
+                            info.append(os.path.join(root,special_file))
+                    else:
+                        info.append(os.path.join(root,special_file))
             if sub == False:
                 sub_dirs[:] = []
-            for special_file in files:
-                if postfix:
-                    if special_file.endswith(postfix):
-                        info.append(os.path.join(root,special_file))
-                elif prefix:
-                    if special_file.startswith(prefix):
-                        info.append(os.path.join(root,special_file))
-                else:
-                    info.append(os.path.join(root,special_file))
-        return info
+        info.sort()
+        return tuple(info)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def copy(srcfile, dstfile):
