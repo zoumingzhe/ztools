@@ -111,6 +111,8 @@ class plot(fbasic):
         说明：调用该方法将显示绘图figure。
         参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show
         """
+        # 自动调整边距，防止子图重叠
+        self.__figure.tight_layout()
         self.__figure.show()
 # ----------------------------------------------------------------------------------------------------
     def savefig(self, path):
@@ -122,6 +124,8 @@ class plot(fbasic):
         参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html#matplotlib.pyplot.savefig
         """
         try:
+            # 自动调整边距，防止子图重叠
+            self.__figure.tight_layout()
             self.__figure.savefig(path)
         except:
             print("%s not exist" % self.get_folder(path))
@@ -251,12 +255,27 @@ class plot(fbasic):
     def xyplot(self, x, y, color = None, linewidth = None, label = None):
         """
         绘制折线图：
-        输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
+        输入参数：(x, y, color = None, linewidth = None, label = None) x、y、颜色、线宽、标签
         返回参数：
         说明：调用该方法将绘制折线图。
         参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot
         """
         plt.plot(x, y)
+# ----------------------------------------------------------------------------------------------------
+    def plot(self, points, color = None, linewidth = None, label = None):
+        """
+        绘制折线图：
+        输入参数：(points, color = None, linewidth = None, label = None) 点、颜色、线宽、标签
+        返回参数：
+        说明：调用该方法将绘制折线图。
+        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot
+        """
+        xp = []
+        yp = []
+        for point in points:
+            xp.append(point['x'])
+            yp.append(point['y'])
+        plt.plot(xp, yp)
 # ----------------------------------------------------------------------------------------------------
     def xyscatter(self, x, y, size = None, color = None, marker = None):
         """
