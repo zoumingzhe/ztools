@@ -6,8 +6,8 @@
 for data
 """
 from .data.fbasic           import (fbasic)
-from .data.xls              import (xls)
 from .data.hash             import (hash)
+from .data.xls              import (xls)
 
 """
 for database
