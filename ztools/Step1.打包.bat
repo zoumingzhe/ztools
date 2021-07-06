@@ -1,6 +1,6 @@
 rd/s/q ".\build"
 rd/s/q ".\dist"
-rd/s/q ".\ksystem.egg-info"
+rd/s/q ".\ztools.egg-info"
 
 python setup.py check
 python setup.py sdist
