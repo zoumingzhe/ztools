@@ -3,11 +3,11 @@
 
 
 """
-for data
+for common
 """
-from .data.fbasic           import (fbasic)
-from .data.hash             import (hash)
-from .data.xls              import (xls)
+from .common.file           import (fbasic)
+from .common.hash           import (hash)
+from .common.xls            import (xls)
 
 """
 for database

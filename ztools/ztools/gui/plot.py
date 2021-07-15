@@ -48,7 +48,7 @@
 # ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
-from ..data.fbasic import fbasic
+from ..common.file import fbasic
 # ----------------------------------------------------------------------------------------------------
 class plot(fbasic):
     """

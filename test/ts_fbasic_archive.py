@@ -1,6 +1,6 @@
 import sys
 sys.path.append('..\\ztools\\ztools')
-from data.fbasic import fbasic
+from common.file import fbasic
 
 fbasic.archive('.\\ts_fbasic\\folder1')
 input("按回车（Enter）继续")

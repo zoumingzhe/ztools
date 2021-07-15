@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, r'..\ztools')
 from ztools.gui.plot import plot
-from ztools.data.fbasic import fbasic
+from ztools.common.file import fbasic
 from ztools.tool.timeout import timeout
 
 # 参考：
