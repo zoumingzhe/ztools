@@ -24,11 +24,11 @@ setup(
     url="https://github.com/zoumingzhe/ztools",
     packages=[
         'ztools',
-        'ztools.data',
+        'ztools.common',
         'ztools.db',
         'ztools.ds',
         'ztools.gui',
-        'ztools.tool',
+        'ztools.utils',
     ],
     license="MIT",
     long_description=open('..\README.rst', mode='r', encoding='UTF-8').read(),
