@@ -4,6 +4,10 @@
 # 类 plot
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2021-08-07 | Zou Mingzhe   | Ver0.9  | 1.删除 Version(self, isShow = False)
+#            |               |         | 2.增加 legend(self, *args, **kwargs)
+#            |               |         | 3.修改 xyplot(self, x, y, *args, **kwargs)
+#            |               |         | 4.修改 plot(self, points, *args, **kwargs)
 # 2020-12-xx | Zou Mingzhe   | Ver0.8  | 1.增加 subplot(self, subtitle)
 #            |               |         | 2.增加 subplots(self)
 #            |               |         | 3.增加 xyscatter(self, x, y, size = None, color = None, marker = None)
@@ -26,7 +30,7 @@
 # 2018-11-19 | Zou Mingzhe   | Ver0.1  | 初始版本
 # ----------------------------------------------------------------------------------------------------
 # MAP：
-# 已测试 | Version(self, ...)           | 版本显示
+# 已测试 | Version(self, ...)           | 版本显示（删除）
 # 已测试 | figure(self)                 | 创建对象
 # 已测试 | close(self)                  | 关闭对象
 # 已测试 | show(self)                   | 显示绘图
@@ -36,6 +40,7 @@
 # 已测试 | label(self, ...)             | 添加坐标轴标签
 # 已测试 | title(self, ...)             | 添加标题
 # 已测试 | grid(self)                   | 绘制网格线
+# 已测试 | legend(self, ...)            | 绘制图例
 # 未测试 | subplot(self)                | 绘制子图
 # 未测试 | subplots(self)               | 绘制子图
 # 已测试 | point(self, ...)             | 获取一个点对象
@@ -45,6 +50,14 @@
 # 已测试 | xyplot(self, ...)            | 绘制折线图
 # 已测试 | xyscatter(self, ...)         | 绘制散点图
 # 已测试 | scatter(self, ...)           | 绘制散点图
+# ----------------------------------------------------------------------------------------------------
+# TODO LIST：
+# Title         标题
+# Axis          坐标轴
+# Label         坐标轴标注
+# Tick          刻度线
+# Tick Label    刻度线注释
+# Legend        图例                    DONE
 # ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
@@ -59,7 +72,7 @@ class plot(fbasic):
     2、支持中文，直接支持标题、坐标轴、图例等的中文显示；
     3、使用Scatter绘制散点图时，使用“点对象”作为参数，而不需要多个“向量”参数，并通过Point进一步简化了点的创建。
     参考：
-    1、https://matplotlib.org/api/pyplot_summary.html
+    1、https://matplotlib.org/stable/api/pyplot_summary.html
     """
     def __init__(self):
         self.__version = "0.8"
@@ -86,7 +99,7 @@ class plot(fbasic):
         输入参数：
         返回参数：
         说明：调用该方法将创建绘图对象。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure
+        参考：https://matplotlib.org/3.3.4/api/_as_gen/matplotlib.figure.Figure.html
         """
         self.__figure = plt.figure(num = id, figsize = figsize, dpi = dpi,\
             facecolor = facecolor, edgecolor = edgecolor,\
@@ -99,7 +112,7 @@ class plot(fbasic):
         输入参数：
         返回参数：
         说明：调用该方法将关闭绘图对象并释放内存。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.close.html#matplotlib.pyplot.close
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.close.html
         """
         plt.close()
 # ----------------------------------------------------------------------------------------------------
@@ -109,7 +122,7 @@ class plot(fbasic):
         输入参数：
         返回参数：
         说明：调用该方法将显示绘图figure。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html
         """
         # 自动调整边距，防止子图重叠
         self.__figure.tight_layout()
@@ -121,7 +134,7 @@ class plot(fbasic):
         输入参数：path 存储路径
         返回参数：
         说明：调用该方法将绘图figure保存为文件，保存路径由path指定。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html#matplotlib.pyplot.savefig
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html
         """
         try:
             # 自动调整边距，防止子图重叠
@@ -136,8 +149,8 @@ class plot(fbasic):
         输入参数：
         返回参数：image 图像数据
         说明：调用该方法将读取图像文件，并返回读取到的图像数据image。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imread.html#matplotlib.pyplot.imread
-        https://matplotlib.org/api/image_api.html
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imread.html
+        https://matplotlib.org/stable/api/image_api.html
         """
         image = img.imread(path)
         return image
@@ -148,8 +161,8 @@ class plot(fbasic):
         输入参数：image 图像数据
         返回参数：
         说明：调用该方法将显示图像image。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html#matplotlib.pyplot.imshow
-        https://matplotlib.org/api/image_api.html
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html
+        https://matplotlib.org/stable/api/image_api.html
         """
         plt.imshow(image) # 显示图片
         plt.axis('off')   # 不显示坐标轴
@@ -161,7 +174,7 @@ class plot(fbasic):
         输入参数：(xlabel = None, ylabel = None) x轴、y轴标签
         返回参数：
         说明：调用该方法将给坐标轴添加标签，支持中文。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html#matplotlib.pyplot.savefig
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html
         """
         if(xlabel != None):
             plt.xlabel(xlabel)
@@ -174,7 +187,7 @@ class plot(fbasic):
         输入参数：title 标题
         返回参数：
         说明：调用该方法给绘图添加标题，支持中文。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html#matplotlib.pyplot.title
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.title.html
         """
         return plt.title(title)
 # ----------------------------------------------------------------------------------------------------
@@ -184,7 +197,7 @@ class plot(fbasic):
         输入参数：
         返回参数：
         说明：调用该方法将在绘图figure上绘制坐标轴。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.axis.html#matplotlib.pyplot.axis
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html
         """
         # plt.axis["xzero"].set_visible(True)
         # plt.axis["xzero"].label.set_text("新建y=0坐标")
@@ -196,9 +209,19 @@ class plot(fbasic):
         输入参数：
         返回参数：
         说明：调用该方法将在绘图figure上绘制网格线。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.grid.html#matplotlib.pyplot.grid
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html
         """
         return plt.grid(True)
+# ----------------------------------------------------------------------------------------------------
+    def legend(self, *args, **kwargs):
+        """
+        绘制图例：
+        输入参数：
+        返回参数：
+        说明：调用该方法将在绘图figure上绘制图例。
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html
+        """
+        return plt.legend(*args, **kwargs)
 # ----------------------------------------------------------------------------------------------------
     def subplot(self, subtitle):
         """
@@ -206,7 +229,7 @@ class plot(fbasic):
         输入参数：subtitle 子图标题
         返回参数：
         说明：调用该方法绘制子图。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot.html
         """
         return plt.subplot(subtitle)
 # ----------------------------------------------------------------------------------------------------
@@ -216,7 +239,7 @@ class plot(fbasic):
         输入参数：
         返回参数：
         说明：调用该方法绘制子图。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html
         """
         return plt.subplots(nrows = nrows, ncols = ncols)
 # ----------------------------------------------------------------------------------------------------
@@ -248,34 +271,34 @@ class plot(fbasic):
         输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
         返回参数：
         说明：调用该方法将绘制条形图。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html#matplotlib.pyplot.bar
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html
         """
         plt.bar(x = x, y = y)
 # ----------------------------------------------------------------------------------------------------
-    def xyplot(self, x, y, color = None, linewidth = None, label = None):
+    def xyplot(self, x, y, *args, **kwargs):
         """
         绘制折线图：
-        输入参数：(x, y, color = None, linewidth = None, label = None) x、y、颜色、线宽、标签
+        输入参数：(x, y, color = None, linewidth = None, linestyle = None, label = None) x、y、颜色、线宽、线型、标签
         返回参数：
         说明：调用该方法将绘制折线图。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
         """
-        plt.plot(x, y)
+        return plt.plot(x, y, *args, **kwargs)
 # ----------------------------------------------------------------------------------------------------
-    def plot(self, points, color = None, linewidth = None, label = None):
+    def plot(self, points, *args, **kwargs):
         """
         绘制折线图：
-        输入参数：(points, color = None, linewidth = None, label = None) 点、颜色、线宽、标签
+        输入参数：(points, color = None, linewidth = None, linestyle = None, label = None) 点、颜色、线宽、线型、标签
         返回参数：
         说明：调用该方法将绘制折线图。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
         """
         xp = []
         yp = []
         for point in points:
             xp.append(point['x'])
             yp.append(point['y'])
-        plt.plot(xp, yp)
+        return plt.plot(xp, yp, *args, **kwargs)
 # ----------------------------------------------------------------------------------------------------
     def xyscatter(self, x, y, size = None, color = None, marker = None):
         """
@@ -283,7 +306,7 @@ class plot(fbasic):
         输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
         返回参数：
         说明：调用该方法将绘制散点图。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html
         """
         plt.scatter(x = x, y = y, s = size, c = color, marker = marker)
 # ----------------------------------------------------------------------------------------------------
@@ -293,7 +316,7 @@ class plot(fbasic):
         输入参数：points 可以是一个点对象，或是几个点对象组成的集合（列表or元组）
         返回参数：
         说明：调用该方法将绘制散点图。
-        参考：https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter
+        参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html
         """
         if(type(points) == dict):
             plt.scatter(points['x'], points['y'], s = points['size'],
