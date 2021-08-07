@@ -68,16 +68,16 @@ class plot(fbasic):
         plt.rcParams['axes.unicode_minus']=False    # 用来正常显示负号
         # 有中文出现的情况，需要u'内容'
 # ----------------------------------------------------------------------------------------------------
-    def Version(self, isShow = False):
-        """
-        版本显示：
-        输入参数：isShow = False
-        返回参数：self.__version
-        说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
-        """
-        if(isShow):
-            print("[ztools]-[plot]-[vesion:%s]" % self.__version)
-        return self.__version
+    # def Version(self, isShow = False):
+    #     """
+    #     版本显示：
+    #     输入参数：isShow = False
+    #     返回参数：self.__version
+    #     说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
+    #     """
+    #     if(isShow):
+    #         print("[ztools]-[plot]-[vesion:%s]" % self.__version)
+    #     return self.__version
 # ----------------------------------------------------------------------------------------------------
     def figure(self, id, figsize = None, dpi = None, facecolor = None, edgecolor = None,\
         frameon = True, clear = False):
