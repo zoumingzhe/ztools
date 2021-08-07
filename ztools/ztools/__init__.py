@@ -30,8 +30,8 @@ from .gui.plot              import (plot)
 
 
 """
-for tool
+for utils
 """
-from .tool.progressbar      import (progressbar)
-from .tool.timeout          import (timeout)
-from .tool.tprint           import (AnsiStyle, AnsiFore, AnsiBack, tprint)
+from .utils.progressbar     import (progressbar)
+from .utils.timeout         import (timeout)
+from .utils.tprint          import (AnsiStyle, AnsiFore, AnsiBack, tprint)
