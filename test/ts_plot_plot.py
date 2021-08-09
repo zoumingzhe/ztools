@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, r'..\ztools')
 from ztools.gui.plot import plot
 from ztools.common.file import fbasic
-from ztools.tool.timeout import timeout
+from ztools.utils.timeout import timeout
 
 # 参考：
 # https://matplotlib.org/api/pyplot_summary.html
@@ -38,6 +38,8 @@ plt.xyplot(x, y1, label = "xyplot1", color = 'red')
 plt.xyplot(x, y2, label = "xyplot2", linewidth = 1.0)
 plt.xyplot(x, y3, label = "xyplot3", linestyle = '--')
 plt.xyplot(x, y4, label = "xyplot4", linestyle = '-.')
+plt.xyplot([3, 3], [1, 2], label = "xyplot", linewidth = 2.0)
+plt.xyplot([3, 3], [4, 5], label = "xyplot", linewidth = 2.0)
 plt.legend()
 plt.savefig('.\\ts_plot\\ts_plot_plot.png')
 plt.close()
