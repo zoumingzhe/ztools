@@ -51,14 +51,6 @@
 # 已测试 | xyscatter(self, ...)         | 绘制散点图
 # 已测试 | scatter(self, ...)           | 绘制散点图
 # ----------------------------------------------------------------------------------------------------
-# TODO LIST：
-# Title         标题
-# Axis          坐标轴
-# Label         坐标轴标注
-# Tick          刻度线
-# Tick Label    刻度线注释
-# Legend        图例                    DONE
-# ----------------------------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import matplotlib.image  as img
 from ..common.file import fbasic
@@ -181,15 +173,15 @@ class plot(fbasic):
         if(ylabel != None):
             plt.ylabel(ylabel)
 # ----------------------------------------------------------------------------------------------------
-    def title(self, title):
+    def title(self, label):
         """
         添加标题：
-        输入参数：title 标题
+        输入参数：label 标题
         返回参数：
         说明：调用该方法给绘图添加标题，支持中文。
         参考：https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.title.html
         """
-        return plt.title(title)
+        return plt.title(label)
 # ----------------------------------------------------------------------------------------------------
     def axis(self):
         """
