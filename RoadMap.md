@@ -5,6 +5,7 @@ RoadMap
 参考 [Working with Excel Files in Python](http://www.python-excel.org/) 页面
  - 已支持 [xlrd](https://xlrd.readthedocs.io/en/latest/)
  - 已支持 [xlwt](https://xlwt.readthedocs.io/en/latest/)
+ - 待支持 逗号分隔的.csv读写
  - 待支持 [openpyxl](https://openpyxl.readthedocs.io/en/stable/)
 
 # plot
