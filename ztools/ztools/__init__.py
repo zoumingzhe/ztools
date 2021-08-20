@@ -7,6 +7,7 @@ for common
 """
 from .common.file           import (fbasic)
 from .common.hash           import (hash)
+from .common.xls            import (csv)
 from .common.xls            import (xls)
 
 """
