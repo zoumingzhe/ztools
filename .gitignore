@@ -8,8 +8,8 @@ ztools/ztools.egg-info/
 example/ex_plot/
 
 test/ts_plot/
-test/ts_fbasic/backup/
-test/ts_fbasic/backup_folder1/
-test/ts_fbasic/backup1.tar
-test/ts_fbasic/backup1.zip
-test/ts_fbasic/backup_folder1.zip
+test/common/ts_fbasic/backup/
+test/common/ts_fbasic/backup_folder1/
+test/common/ts_fbasic/backup1.tar
+test/common/ts_fbasic/backup1.zip
+test/common/ts_fbasic/backup_folder1.zip
