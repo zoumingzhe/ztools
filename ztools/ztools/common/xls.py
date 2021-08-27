@@ -18,11 +18,14 @@ class csv():
         self.__version = "0.1"
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def read(csvfile):
+    def read(csvfile, cleanblank = True):
         with open(csvfile, 'r', newline = None) as f:
             sheet = []
             for eachline in f:
-                sheet.append([ e.strip(' ') for e in eachline[:-1].split(',') ])
+                row = [ e.strip() for e in eachline.split(',') ]
+                if cleanblank and row == ['']:
+                    continue
+                sheet.append(row)
             return sheet
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
