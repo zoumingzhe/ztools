@@ -137,14 +137,11 @@ class fbasic:
                     info.append(os.path.join(root,sub_dir))
             if ret_file == True:
                 for special_file in files:
-                    if postfix:
-                        if special_file.endswith(postfix):
-                            info.append(os.path.join(root,special_file))
-                    elif prefix:
-                        if special_file.startswith(prefix):
-                            info.append(os.path.join(root,special_file))
-                    else:
-                        info.append(os.path.join(root,special_file))
+                    if postfix and not special_file.endswith(postfix):
+                        continue
+                    if prefix and not special_file.startswith(prefix):
+                        continue
+                    info.append(os.path.join(root,special_file))
             if sub == False:
                 sub_dirs[:] = []
         info.sort()
