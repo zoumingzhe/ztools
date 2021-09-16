@@ -5,7 +5,7 @@ from common.sheet import csv
 import unittest
 from unittest import mock
 
-class testcsv(unittest.TestCase):
+class test_csv(unittest.TestCase):
     def test_csv_read_cleanblank(self):
         result = csv.read(r'.\ts_csv_input.csv', cleanblank = True)
         expect = [
