@@ -5,7 +5,7 @@ from common.file import fbasic
 import unittest
 from unittest import mock
 
-class testfbasic(unittest.TestCase):
+class test_fbasic(unittest.TestCase):
     def test_fbasic_get_name(self):
         result = fbasic.get_name(r'.\demo.txt',)
         self.assertEqual(result, 'demo.txt')
