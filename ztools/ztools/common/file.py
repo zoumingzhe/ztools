@@ -78,13 +78,12 @@ class fbasic:
         返回参数：path
         说明：该方法生成文件路径，folder指定文件夹路径，name指定文件名（支持list）。
         """
-        if type(name) == list:
-            path = []
-            for i in range(len(name)):
-                path.append(folder + '\\' + name[i])
-            return path
-        else:
+        if type(name) is str:
             return (folder + '\\' + name)
+        path = []
+        for i in name:
+            path.append(folder + '\\' + i)
+        return tuple(path)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def get_name(filepath):
@@ -94,13 +93,12 @@ class fbasic:
         返回参数：name
         说明：该方法提取路径中的文件名，filepath指定文件路径（支持list）；若是文件夹路径则返回文件夹名。
         """
-        if type(filepath) == list:
-            name = []
-            for i in range(len(filepath)):
-                name.append(os.path.basename(filepath[i]))
-            return name
-        else:
-            return os.path.basename(filepath)    #分离文件名和路径
+        if type(filepath) is str:
+            return os.path.basename(filepath)
+        name = []
+        for i in filepath:
+            name.append(os.path.basename(i))
+        return tuple(name)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def get_folder(filepath):
@@ -110,13 +108,12 @@ class fbasic:
         返回参数：folder
         说明：该方法提取路径中的文件夹名，filepath指定文件路径（支持list）；若是文件夹路径则返回上一级问价夹路径。
         """
-        if type(filepath) == list:
-            folder = []
-            for i in range(len(filepath)):
-                folder.append(os.path.dirname(filepath[i]))
-            return folder
-        else:
-            return os.path.dirname(filepath)    #分离文件名和路径
+        if type(filepath) is str:
+            return os.path.dirname(filepath)
+        folder = []
+        for i in filepath:
+            folder.append(os.path.dirname(i))
+        return tuple(folder)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def scan(directory, sub=False, prefix=None, postfix=None, ret_dir=False, ret_file=True):
@@ -159,10 +156,10 @@ class fbasic:
             print("%s not exist!"%(srcfile))
             return False
         try:
-            fpath=os.path.dirname(dstfile)    #分离文件名和路径
+            fpath = os.path.dirname(dstfile)    # 分离文件名和路径
             if not os.path.exists(fpath):
-                os.makedirs(fpath)                #创建路径
-            shutil.copyfile(srcfile,dstfile)      #复制文件
+                os.makedirs(fpath)              # 创建路径
+            shutil.copyfile(srcfile,dstfile)    # 复制文件
         except Exception as e:
             return False
         print(" copy %s \r\n to-> %s" % ( srcfile, dstfile ) )
@@ -180,10 +177,10 @@ class fbasic:
             print("%s not exist!"%(srcfile))
             return False
         try:
-            fpath=os.path.dirname(dstfile)    #分离文件名和路径
+            fpath = os.path.dirname(dstfile)    # 分离文件名和路径
             if not os.path.exists(fpath):
-                os.makedirs(fpath)                #创建路径
-            shutil.move(srcfile,dstfile)          #移动文件
+                os.makedirs(fpath)              # 创建路径
+            shutil.move(srcfile,dstfile)        # 移动文件
         except Exception as e:
             return False
         print(" move %s \r\n to-> %s" % ( srcfile, dstfile ) )
@@ -201,7 +198,7 @@ class fbasic:
             print("%s not exist!"%(srcfile))
             return False
         try:
-            os.rename(srcFile,dstFile)
+            os.rename(srcfile, dstfile)
         except Exception as e:
             return False
         return True

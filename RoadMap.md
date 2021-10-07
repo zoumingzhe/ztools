@@ -6,6 +6,10 @@ RoadMap
  - 2021/08/20 新增并实现csv类
 
 # common
+## file
+ - [BUG]scan输出tuple类型其他函数不支持
+ - 增加join方法并使用join方法重写路径拼接get_path
+ - 使用format方法生成字符串
 ## sheet
 ### sheet
 表单基类。
