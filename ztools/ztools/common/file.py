@@ -40,23 +40,26 @@ class fbasic:
     """
     def __init__(self):
         self.__version = "0.7"
-        self.__path = {}
+        self.__mappath = {}
 # ----------------------------------------------------------------------------------------------------
     def map(self, key = None, path = None):
         """
         路径映射：
         输入参数：key, path
-        返回参数：self.__path
+        返回参数：self.__mappath
         说明：该方法提供路径映射的记录，
         若key、path均不为None则记录路径映射，
         若只有key不为None则返回key的路径映射，
         若key、path均为None则返回所有的的路径映射。
         """
-        if(key != None and path != None):
-            self.__path[key] = path
-        if(key != None and path == None):
-            return self.__path[key] # TODO：检查key是否在dict内
-        return self.__path
+        if key is not None:
+            if path is not None:
+                self.__mappath[key] = path
+            # TODO：检查key是否在dict内
+            if key not in self.__mappath:
+                return None
+            return self.__mappath[key]
+        return self.__mappath
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def ensure(path, isCreate = True):
@@ -66,54 +69,61 @@ class fbasic:
         返回参数：
         说明：该方法检查路径path是否存在并返回，若不存在则根据iscreate指示生成路径。
         """
+        # TODO : remove isCreate para
         if os.path.exists(path) == False and isCreate == True:
             os.makedirs(path)
         return os.path.exists(path)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def get_path(folder, name):
+    def join(dirname, basename):
         """
         获取路径：
-        输入参数：folder, name
+        输入参数：dirname, basename
         返回参数：path
-        说明：该方法生成文件路径，folder指定文件夹路径，name指定文件名（支持list）。
+        说明：该方法生成文件路径，dirname指定文件夹路径，basename指定文件名（支持list）。
         """
-        if type(name) is str:
-            return (folder + '\\' + name)
-        path = []
-        for i in name:
-            path.append(folder + '\\' + i)
-        return tuple(path)
+        x = type(basename)
+        if x is str:
+            return os.path.join(dirname, basename)
+        if x is list or x is tuple:
+            path = []
+            for i in basename:
+                path.append(os.path.join(dirname, i))
+            return tuple(path)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def get_name(filepath):
+    def basename(path):
         """
         获取文件名：
-        输入参数：filepath
-        返回参数：name
-        说明：该方法提取路径中的文件名，filepath指定文件路径（支持list）；若是文件夹路径则返回文件夹名。
+        输入参数：path
+        返回参数：basename
+        说明：该方法提取路径中的文件名，path指定文件路径（支持list）；若是文件夹路径则返回文件夹名。
         """
-        if type(filepath) is str:
-            return os.path.basename(filepath)
-        name = []
-        for i in filepath:
-            name.append(os.path.basename(i))
-        return tuple(name)
+        x = type(path)
+        if x is str:
+            return os.path.basename(path)
+        if x is list or x is tuple:
+            basename = []
+            for i in path:
+                basename.append(os.path.basename(i))
+            return tuple(basename)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def get_folder(filepath):
+    def dirname(path):
         """
         获取文件夹名：
-        输入参数：filepath
-        返回参数：folder
-        说明：该方法提取路径中的文件夹名，filepath指定文件路径（支持list）；若是文件夹路径则返回上一级问价夹路径。
+        输入参数：path
+        返回参数：dirname
+        说明：该方法提取路径中的文件夹名，path指定文件路径（支持list）；若是文件夹路径则返回上一级问价夹路径。
         """
-        if type(filepath) is str:
-            return os.path.dirname(filepath)
-        folder = []
-        for i in filepath:
-            folder.append(os.path.dirname(i))
-        return tuple(folder)
+        x = type(path)
+        if x is str:
+            return os.path.dirname(path)
+        if x is list or x is tuple:
+            dirname = []
+            for i in path:
+                dirname.append(os.path.dirname(i))
+            return tuple(dirname)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def scan(directory, sub=False, prefix=None, postfix=None, ret_dir=False, ret_file=True):
@@ -128,98 +138,118 @@ class fbasic:
         参数ret_file指定结果是否包含文件（默认包含）。
         """
         info = []
+        # TODO : return dir via dir tree
         for root, sub_dirs, files in os.walk(directory):
             if ret_dir == True:
                 for sub_dir in sub_dirs:
-                    info.append(os.path.join(root,sub_dir))
+                    info.append(os.path.join(root, sub_dir))
             if ret_file == True:
                 for special_file in files:
                     if postfix and not special_file.endswith(postfix):
                         continue
                     if prefix and not special_file.startswith(prefix):
                         continue
-                    info.append(os.path.join(root,special_file))
+                    info.append(os.path.join(root, special_file))
             if sub == False:
                 sub_dirs[:] = []
         info.sort()
         return tuple(info)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def copy(srcfile, dstfile):
+    def copy(srcpath, dstpath):
         """
-        拷贝文件：
-        输入参数：srcfile 源文件路径，dstfile 目的文件路径
-        返回参数：True 成功， False 失败
+        拷贝文件或文件夹：
+        输入参数：srcpath 源文件路径，dstpath 目的文件路径
+        返回参数：True 成功，False 失败
         说明：调用该方法将文件从源路径拷贝到目的路径。
         """
-        if not os.path.isfile(srcfile):
-            print("%s not exist!"%(srcfile))
-            return False
-        try:
-            fpath = os.path.dirname(dstfile)    # 分离文件名和路径
-            if not os.path.exists(fpath):
-                os.makedirs(fpath)              # 创建路径
-            shutil.copyfile(srcfile,dstfile)    # 复制文件
-        except Exception as e:
-            return False
-        print(" copy %s \r\n to-> %s" % ( srcfile, dstfile ) )
-        return True
+        if os.path.isfile(srcpath):
+            try:
+                dirname = os.path.dirname(dstpath)
+                if not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                shutil.copyfile(srcpath, dstpath)
+            except Exception as e:
+                return False
+            print("copy {} \r\n ==> {}".format(srcpath, dstpath))
+            return True
+
+        if os.path.isdir(srcpath):
+            try:
+                dirname = os.path.dirname(dstpath)
+                if not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                shutil.copytree(srcpath, dstpath)
+            except Exception as e:
+                return False
+            print("copy {} \r\n ==> {}".format(srcpath, dstpath))
+            return True
+
+        return False
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def move(srcfile, dstfile):
+    def move(srcpath, dstpath):
         """
-        移动文件：
-        输入参数：srcfile 源文件路径，dstfile 目的文件路径
-        返回参数：True 成功， False 失败
+        移动文件或文件夹：
+        输入参数：srcpath 源路径，dstpath 目的路径
+        返回参数：True 成功，False 失败
         说明：调用该方法将文件从源路径移动到目的路径。
         """
-        if not os.path.isfile(srcfile):
-            print("%s not exist!"%(srcfile))
-            return False
-        try:
-            fpath = os.path.dirname(dstfile)    # 分离文件名和路径
-            if not os.path.exists(fpath):
-                os.makedirs(fpath)              # 创建路径
-            shutil.move(srcfile,dstfile)        # 移动文件
-        except Exception as e:
-            return False
-        print(" move %s \r\n to-> %s" % ( srcfile, dstfile ) )
-        return True
+        if os.path.isfile(srcpath) or os.path.isdir(srcpath):
+            try:
+                dirname = os.path.dirname(dstpath)
+                if not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                shutil.move(srcpath, dstpath)
+            except Exception as e:
+                return False
+            print("move {} \r\n ==> {}".format(srcpath, dstpath))
+            return True
+
+        return False
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def rename(srcfile, dstfile):
+    def rename(srcpath, dstpath):
         """
-        重命名文件：
-        输入参数：srcfile 源文件路径，dstfile 重命名文件路径
-        返回参数：True 成功， False 失败
+        重命名文件或文件夹：
+        输入参数：srcpath 源路径，dstpath 重命名路径
+        返回参数：True 成功，False 失败
         说明：调用该方法将文件重命名。
         """
-        if not os.path.isfile(srcfile):
-            print("%s not exist!"%(srcfile))
-            return False
-        try:
-            os.rename(srcfile, dstfile)
-        except Exception as e:
-            return False
-        return True
+        if os.path.isfile(srcpath) or os.path.isdir(srcpath):
+            try:
+                os.rename(srcpath, dstpath)
+            except Exception as e:
+                return False
+            return True
+
+        return False
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def delete(srcfile):
+    def remove(rmpath):
         """
-        删除文件：
-        输入参数：srcfile 源文件路径
-        返回参数：True 成功， False 失败
+        删除文件或文件夹：
+        输入参数：rmpath 删除文件或文件夹路径
+        返回参数：True 成功，False 失败
         说明：调用该方法将文件从源路径删除。
         """
-        if not os.path.isfile(srcfile):
-            print("%s not exist!"%(srcfile))
-            return False
-        try:
-            os.remove(srcfile)
-        except Exception as e:
-            return False
-        print("delete %s"%( srcfile))
-        return True
+        if os.path.isfile(rmpath):
+            try:
+                os.remove(rmpath)
+            except Exception as e:
+                return False
+            print("removed {}".format(rmpath))
+            return True
+
+        if os.path.isdir(rmpath):
+            try:
+                os.removedirs(rmpath)
+            except Exception as e:
+                return False
+            print("removed {}".format(rmpath))
+            return True
+
+        return False
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def archive(srcdir, dstdir = None, buname = None, format = "zip"):
@@ -229,11 +259,11 @@ class fbasic:
                  dstdir = None   归档路径，不包括文件名，不指定时默认归档到同级文件夹下
                  buname = None   归档文件名，不包含后缀，不指定时默认使用“backup_文件夹名”作为文件名
                  format = "zip"  归档格式（zip、tar、bztar、gztar），默认使用zip
-        返回参数：True 成功， False 失败
+        返回参数：True 成功，False 失败
         说明：调用该方法将文件归档至指定目录下。
         """
         if not os.path.exists(srcdir):
-            print("%s not exist!"%(srcdir))
+            print("{} not exist!".format(srcdir))
             return False
         try:
             if buname == None:
@@ -254,11 +284,11 @@ class fbasic:
         归档文件释放：
         输入参数：srcpath          需要释放的归档文件路径，包含文件名及后缀
                  dstpath = None   释放路径，不指定时默认释放到同级文件夹下
-        返回参数：True 成功， False 失败
+        返回参数：True 成功，False 失败
         说明：调用该方法将归档文件释放至指定目录下。
         """
         if not os.path.isfile(srcpath):
-            print("%s not exist!"%(srcpath))
+            print("{} not exist!".format(srcpath))
             return False
         try:
             if dstpath == None:

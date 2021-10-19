@@ -10,6 +10,10 @@ RoadMap
  - [BUG]scan输出tuple类型其他函数不支持
  - 增加join方法并使用join方法重写路径拼接get_path
  - 使用format方法生成字符串
+ - copy、move、rename、remove同时支持文件和文件夹操作
+ - ensure移除isCreate参数
+ - scan以tree结构（{'dirs:' : [], 'files' : []}）返回结果并重命名为tree
+ - 通过锁以保证并发性
 ## sheet
 ### sheet
 表单基类。
