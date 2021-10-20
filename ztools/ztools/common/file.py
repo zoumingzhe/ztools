@@ -4,6 +4,7 @@
 # 类 fbasic
 # ----------------------------------------------------------------------------------------------------
 # 变更履历：
+# 2021-10-20 | Zou Mingzhe   | Ver0.8  | 1.重构代码
 # 2021-06-16 | Zou Mingzhe   | Ver0.7  | 1.修改 scan(self, ...) 支持扫描目录，返回元组并且有序
 # 2019-05-24 | Zou Mingzhe   | Ver0.6  | 1.增加 archive(self, srcdir, dstdir = None, name = None, format = "zip")
 #            |               |         | 2.增加 archive_unpack(self, srcpath, dstpath = None)
@@ -19,16 +20,17 @@
 # ----------------------------------------------------------------------------------------------------
 # MAP：
 # 已测试 | map(self, ...)               | 路径映射
-# 已测试 | ensure(self, ...)            | 路径检查
-# 已测试 | get_path(self, ...)          | 获取路径
-# 已测试 | get_name(self, ...)          | 获取文件名
-# 已测试 | get_folder(self, ...)        | 获取文件夹名
-# 已测试 | scan(self, ...)              | 扫描文件
-# 已测试 | copy(self, ...)              | 拷贝文件
-# 已测试 | move(self, ...)              | 移动文件
-# 已测试 | delete(self, ...)            | 删除文件
+# 待修改 | ensure(self, ...)            | 路径检查
+# 已测试 | join(self, ...)              | 拼接路径
+# 已测试 | basename(self, ...)          | 获取文件名或文件夹名
+# 已测试 | dirname(self, ...)           | 获取上一级路径
+# 待重构 | scan(self, ...)              | 扫描文件夹
+# 已测试 | copy(self, ...)              | 拷贝文件或文件夹
+# 已测试 | move(self, ...)              | 移动文件或文件夹
+# 已测试 | remove(self, ...)            | 删除文件或文件夹
+# 已测试 | rename(self, ...)            | 重命名文件或文件夹
 # 已测试 | archive(self, ...)           | 归档文件
-# 已测试 | archive_unpack(self, ...)    | 归档文件释放
+# 已测试 | archive_unpack(self, ...)    | 归档文件解包
 # 未开发 | zip(self, ...)               | 压缩文件
 # ----------------------------------------------------------------------------------------------------
 import os
@@ -75,21 +77,35 @@ class fbasic:
         return os.path.exists(path)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def join(dirname, basename):
+    def join(*args, **kwargs):
         """
         获取路径：
         输入参数：dirname, basename
         返回参数：path
         说明：该方法生成文件路径，dirname指定文件夹路径，basename指定文件名（支持list）。
         """
-        x = type(basename)
-        if x is str:
-            return os.path.join(dirname, basename)
-        if x is list or x is tuple:
-            path = []
-            for i in basename:
-                path.append(os.path.join(dirname, i))
-            return tuple(path)
+        if 'dirname' in kwargs:
+            dirname = kwargs.pop('dirname')
+            num = len(args)
+            if num > 1:
+                path = []
+                for i in args:
+                    path.append(os.path.join(dirname, i))
+                return tuple(path)
+            elif len(args) == 1:
+                return os.path.join(dirname, args[0])
+            else:
+                return dirname
+        else:
+            return os.path.join(*args)
+        # x = type(basename)
+        # if x is str:
+        #     return os.path.join(dirname, basename)
+        # if x is list or x is tuple:
+        #     path = []
+        #     for i in args:
+        #         path.append(os.path.join(dirname, i))
+        #     return tuple(path)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def basename(path):
@@ -209,23 +225,6 @@ class fbasic:
         return False
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def rename(srcpath, dstpath):
-        """
-        重命名文件或文件夹：
-        输入参数：srcpath 源路径，dstpath 重命名路径
-        返回参数：True 成功，False 失败
-        说明：调用该方法将文件重命名。
-        """
-        if os.path.isfile(srcpath) or os.path.isdir(srcpath):
-            try:
-                os.rename(srcpath, dstpath)
-            except Exception as e:
-                return False
-            return True
-
-        return False
-# ----------------------------------------------------------------------------------------------------
-    @staticmethod
     def remove(rmpath):
         """
         删除文件或文件夹：
@@ -247,6 +246,23 @@ class fbasic:
             except Exception as e:
                 return False
             print("removed {}".format(rmpath))
+            return True
+
+        return False
+# ----------------------------------------------------------------------------------------------------
+    @staticmethod
+    def rename(srcpath, dstpath):
+        """
+        重命名文件或文件夹：
+        输入参数：srcpath 源路径，dstpath 重命名路径
+        返回参数：True 成功，False 失败
+        说明：调用该方法将文件重命名。
+        """
+        if os.path.isfile(srcpath) or os.path.isdir(srcpath):
+            try:
+                os.rename(srcpath, dstpath)
+            except Exception as e:
+                return False
             return True
 
         return False
