@@ -98,14 +98,6 @@ class fbasic:
                 return dirname
         else:
             return os.path.join(*args)
-        # x = type(basename)
-        # if x is str:
-        #     return os.path.join(dirname, basename)
-        # if x is list or x is tuple:
-        #     path = []
-        #     for i in args:
-        #         path.append(os.path.join(dirname, i))
-        #     return tuple(path)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def basename(path):
