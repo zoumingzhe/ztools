@@ -19,23 +19,49 @@ class hash():
     """
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
-    def __file(h, fp):
+    def __file(h, filepath):
         """
         哈希计算：
         输入参数：fp 文件路径
         返回参数：
         说明：调用该方法将返回文件哈希计算值。
         """
-        try:
-            with open(fp, 'rb') as f:
+        with open(filepath, 'rb') as f:
+            d = f.read(4096)
+            while d:
+                h.update(d)
                 d = f.read(4096)
-                while d:
-                    h.update(d)
-                    d = f.read(4096)
-                f.close()
-                return h.hexdigest()
-        except:
-            return None
+            f.close()
+            return h.hexdigest()
+# ----------------------------------------------------------------------------------------------------
+    @staticmethod
+    def __calc(handle, *args, **kwargs):
+        """
+        哈希计算：
+        输入参数：fp 文件路径
+        返回参数：
+        说明：调用该方法将返回哈希计算值。
+        """
+        if 'filepath' in kwargs:
+            fp = kwargs.pop('filepath')
+            if type(fp) is not str:
+                raise TypeError('filepath must string')
+            if not os.path.isfile(fp):
+                raise ValueError('file "{}" is not exist'.format(fp))
+            return hash.__file(handle, fp)
+        # TODO : too many args
+        if len(args) is not 1:
+            raise ValueError('too many arguments')
+        data = args[0]
+        # TODO : 转换字符串
+        if type(data) is str:
+            if 'encode' not in kwargs:
+                raise ValueError('miss encode param')
+            data = data.encode(kwargs['encode'])
+        if type(data) is not bytes:
+            raise TypeError('data must bytes')
+        handle.update(data)
+        return handle.hexdigest()
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def md5(*args, **kwargs):
@@ -45,27 +71,10 @@ class hash():
         返回参数：
         说明：调用该方法将返回md5计算值。
         """
+        handle = hashlib.md5()
         if not args and not kwargs:
-            return hashlib.md5()
-        if 'file' in kwargs:
-            f = kwargs['file']
-            x = type(f)
-            if x is str and os.path.isfile(f):
-                return hash.__file(hashlib.md5(), f)
-            if x is list or x is tuple:
-                h = []
-                for n in f:
-                    h.append(hash.__file(hashlib.md5(), n))
-                return h if x is list else tuple(h)
-            return None
-        if not args:
-            return None
-        h = []
-        for data in args:
-            if type(data) is not bytes:
-                return None
-            h.append(hashlib.md5(data).hexdigest())
-        return h if len(h) > 1 else h[0]
+            return handle
+        return hash.__calc(handle, *args, **kwargs)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod
     def sha1(*args, **kwargs):
@@ -75,25 +84,8 @@ class hash():
         返回参数：
         说明：调用该方法将返回sha1计算值。
         """
+        handle = hashlib.sha1()
         if not args and not kwargs:
-            return hashlib.sha1()
-        if 'file' in kwargs:
-            f = kwargs['file']
-            x = type(f)
-            if x is str and os.path.isfile(f):
-                return hash.__file(hashlib.sha1(), f)
-            if x is list or x is tuple:
-                h = []
-                for n in f:
-                    h.append(hash.__file(hashlib.sha1(), n))
-                return h if x is list else tuple(h)
-            return None
-        if not args:
-            return None
-        h = []
-        for data in args:
-            if type(data) is not bytes:
-                return None
-            h.append(hashlib.sha1(data).hexdigest())
-        return h if len(h) > 1 else h[0]
+            return handle
+        return hash.__calc(handle, *args, **kwargs)
 # ----------------------------------------------------------------------------------------------------
