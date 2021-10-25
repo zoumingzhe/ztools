@@ -133,7 +133,7 @@ class plot(fbasic):
             self.__figure.tight_layout()
             self.__figure.savefig(path)
         except:
-            print("%s not exist" % self.get_folder(path))
+            print("%s not exist" % self.dirname(path))
 # ----------------------------------------------------------------------------------------------------
     def imread(self, path):
         """
