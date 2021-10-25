@@ -100,9 +100,9 @@ class xls(fbasic):
     @staticmethod
     def WriteFile(book, path):
         try:
-            fbasic.ensure(fbasic.get_folder(path))
+            fbasic.ensure(fbasic.dirname(path))
             book.save(path)
-        except:
+        except e as error:
             print("Excel文件\"%s\"保存失败，请检查路径是否正确、文件是否关闭！" % path)
 # ----------------------------------------------------------------------------------------------------
     @staticmethod

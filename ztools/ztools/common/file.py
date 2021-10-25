@@ -275,11 +275,11 @@ class fbasic:
             return False
         try:
             if buname == None:
-                buname = "backup_" + fbasic.get_name(srcdir)
+                buname = "backup_" + fbasic.basename(srcdir)
             if dstdir == None:
-                dstdir = fbasic.get_folder(srcdir)
+                dstdir = fbasic.dirname(srcdir)
             fbasic.ensure(dstdir)
-            dstdir = fbasic.get_path(dstdir, buname)
+            dstdir = fbasic.join(dstdir, buname)
             shutil.make_archive(dstdir, format, srcdir)
         except Exception as e:
             # print(e)
@@ -300,7 +300,7 @@ class fbasic:
             return False
         try:
             if dstpath == None:
-                dstpath = fbasic.get_folder(srcpath)
+                dstpath = fbasic.dirname(srcpath)
             shutil.unpack_archive(srcpath, dstpath)
         except Exception as e:
             # print(e)
