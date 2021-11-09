@@ -34,4 +34,4 @@ for utils
 """
 from .utils.progressbar     import (progressbar)
 from .utils.timeout         import (timeout)
-from .utils.tprint          import (AnsiStyle, AnsiFore, AnsiBack, tprint)
+from .utils.zprint          import (AnsiStyle, AnsiFore, AnsiBack, zprint)

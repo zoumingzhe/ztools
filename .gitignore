@@ -1,12 +1,24 @@
+# python
+*.py[cod]
 
-*.pyc
+# packages
+*.egg-info
+*.egg*
+dist
+build
 
-ztools/build/
-ztools/dist/
-ztools/ztools.egg-info/
+# setup
+/AUTHORS
+/ChangeLog
 
+# ztools/build/
+# ztools/dist/
+# ztools/ztools.egg-info/
+
+# example
 example/ex_plot/
 
+# test
 test/ts_plot/
 test/common/ts_fbasic/backup/
 test/common/ts_fbasic/backup_folder1/
