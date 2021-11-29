@@ -1,5 +1,6 @@
 # Copyright (c) 2018-2021 ZouMingzhe <zoumingzhe@qq.com>
-# This module is part of the ztools package, which is released under a MIT licence.
+# These modules is part of the package,
+# which is released under a MIT licence.
 
 
 """
