@@ -11,6 +11,16 @@ build
 /AUTHORS
 /ChangeLog
 
+# tox
+.tox
+# cover/
+# .coverage*
+# !.coveragerc
+# nosetests.xml
+# .testrepository
+# .venv
+# .stestr
+
 # ztools/build/
 # ztools/dist/
 # ztools/ztools.egg-info/
