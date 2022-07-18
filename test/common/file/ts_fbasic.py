@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append(r'..\..\..\ztools\ztools')
+sys.path.append(r'..\..\..\ztools')
 from common.file import fbasic
 
 import unittest
@@ -159,6 +159,23 @@ class test_fbasic(unittest.TestCase):
         # only folder
         # file and folder
         # no file and folder
+
+    def test_fbasic_split(self):
+        result = fbasic.split(r'.\unkown.log', r'.\split')
+        self.assertEqual(result, False)
+        # perpaer test environment
+        result = fbasic.remove(r'.\split')
+        self.assertEqual(result, True)
+        result = fbasic.copy(r'.\file\split.log', r'.\file\split1.log')
+        self.assertEqual(result, True)
+        # split file via difference length
+        result = fbasic.split(r'.\file\split.log', r'.\split', 4, False)
+        self.assertEqual(result, True)
+        result = fbasic.split(r'.\file\split.log', r'.\split', 10, False)
+        self.assertEqual(result, False)
+        # default delete source file after finish
+        result = fbasic.split(r'.\file\split1.log', r'.\split', 5)
+        self.assertEqual(result, True)
 
 if __name__ == '__main__':
     unittest.main()
