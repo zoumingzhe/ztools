@@ -21,7 +21,7 @@ class hash():
     def __file(h, filepath):
         """
         哈希计算：
-        输入参数：fp 文件路径
+        输入参数： filepath = <path> 文件路径
         返回参数：
         说明：调用该方法将返回文件哈希计算值。
         """
@@ -37,7 +37,7 @@ class hash():
     def __calc(handle, *args, **kwargs):
         """
         哈希计算：
-        输入参数：fp 文件路径
+        输入参数： filepath = <path> 文件路径
         返回参数：
         说明：调用该方法将返回哈希计算值。
         """
@@ -48,17 +48,14 @@ class hash():
             if not os.path.isfile(fp):
                 raise ValueError('file "{}" is not exist'.format(fp))
             return hash.__file(handle, fp)
-        # TODO : too many args
-        if len(args) is not 1:
-            raise ValueError('too many arguments')
+        # too many args
+        assert len(args) == 1, 'too many arguments'
+        # handle string type
         data = args[0]
-        # TODO : 转换字符串
         if type(data) is str:
-            if 'encode' not in kwargs:
-                raise ValueError('miss encode param')
+            assert 'encode' in kwargs, 'miss encode param'
             data = data.encode(kwargs['encode'])
-        if type(data) is not bytes:
-            raise TypeError('data must bytes')
+        assert type(data) is bytes, 'data must bytes'
         handle.update(data)
         return handle.hexdigest()
 # ------------------------------------------------------------------------------
@@ -66,7 +63,7 @@ class hash():
     def md5(*args, **kwargs):
         """
         md5计算：
-        输入参数：data 数据
+        输入参数：
         返回参数：
         说明：调用该方法将返回md5计算值。
         """
@@ -79,7 +76,7 @@ class hash():
     def sha1(*args, **kwargs):
         """
         sha1计算：
-        输入参数：data 数据
+        输入参数：
         返回参数：
         说明：调用该方法将返回sha1计算值。
         """

@@ -3,6 +3,7 @@
 # 类 plot
 # ------------------------------------------------------------------------------
 # 变更履历：
+# 2022-08-08 | Zou Mingzhe   | Ver0.10 | 1.部分接口增加 @staticmethod
 # 2021-08-07 | Zou Mingzhe   | Ver0.9  | 1.删除 Version(self, isShow = False)
 #            |               |         | 2.增加 legend(self, *args, **kwargs)
 #            |               |         | 3.修改 xyplot(self, x, y, *args, **kwargs)
@@ -66,22 +67,11 @@ class plot(fbasic):
     1、https://matplotlib.org/stable/api/pyplot_summary.html
     """
     def __init__(self):
-        self.__version = "0.8"
+        self.__version = "0.10"
         self.__figure  = None
         plt.rcParams['font.sans-serif']=['SimHei']  # 用来正常显示中文标签
         plt.rcParams['axes.unicode_minus']=False    # 用来正常显示负号
         # 有中文出现的情况，需要u'内容'
-# ------------------------------------------------------------------------------
-    # def Version(self, isShow = False):
-    #     """
-    #     版本显示：
-    #     输入参数：isShow = False
-    #     返回参数：self.__version
-    #     说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
-    #     """
-    #     if(isShow):
-    #         print("[ztools]-[plot]-[vesion:%s]" % self.__version)
-    #     return self.__version
 # ------------------------------------------------------------------------------
     def figure(self, id, figsize = None, dpi = None, facecolor = None, edgecolor = None,\
         frameon = True, clear = False):
@@ -134,6 +124,7 @@ class plot(fbasic):
         except:
             print("%s not exist" % self.dirname(path))
 # ------------------------------------------------------------------------------
+    @staticmethod
     def imread(self, path):
         """
         读取图像文件：
@@ -146,6 +137,7 @@ class plot(fbasic):
         image = img.imread(path)
         return image
 # ------------------------------------------------------------------------------
+    @staticmethod
     def imshow(self, image):
         """
         显示图像：
@@ -234,6 +226,7 @@ class plot(fbasic):
         """
         return plt.subplots(nrows = nrows, ncols = ncols)
 # ------------------------------------------------------------------------------
+    @staticmethod
     def point(self, x, y, size = None, color = None, marker = None):
         """
         获取一个点对象：
@@ -244,6 +237,7 @@ class plot(fbasic):
         point = {'x':x, 'y':y, 'size':size, 'color':color, 'marker':marker}
         return point
 # ------------------------------------------------------------------------------
+    @staticmethod
     def points(self, x, y, size = None, color = None, marker = None):
         """
         获取多个点对象：
@@ -251,6 +245,9 @@ class plot(fbasic):
         返回参数：points
         说明：调用该方法将获取一个点对象，点的坐标（x、y）是必须的，其他可选。
         """
+        assert type(x) is list or type(x) is tuple, "type {} is not list or tuple".format(type(x))
+        assert type(y) is list or type(y) is tuple, "type {} is not list or tuple".format(type(y))
+        assert len(x) == len(y), "x length : {} not equal to y length : {}".format(len(x), len(y))
         points = []
         for i in range(len(x)):
             points.append({'x':x[i], 'y':y[i], 'size':size, 'color':color, 'marker':marker})
