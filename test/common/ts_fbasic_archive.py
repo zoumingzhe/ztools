@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'..\..\ztools\ztools')
+sys.path.append(r'../../ztools')
 from common.file import fbasic
 
 fbasic.archive('.\\ts_fbasic\\folder1')
