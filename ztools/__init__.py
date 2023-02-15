@@ -35,4 +35,5 @@ for utils
 """
 from .utils.progressbar     import (progressbar)
 from .utils.timeout         import (timeout)
+from .utils.zemail          import (mail)
 from .utils.zprint          import (AnsiStyle, AnsiFore, AnsiBack, zprint)
