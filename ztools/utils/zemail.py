@@ -45,7 +45,7 @@ class mail:
 
         mimetype, encoding = mimetypes.guess_type(filepath)
         if mimetype is None:
-            return False
+            mimetype = 'application/octet-stream'
         maintype, subtype = mimetype.split('/', 1)
 
         with open(filepath,'rb') as f:
