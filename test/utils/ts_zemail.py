@@ -4,10 +4,14 @@ from utils.zemail import mail
 
 
 
-mail("mingzhe.zou@easystack.cn", content="test").send()
+
+mail("zoumingzhe@qq.com", subject = "test", content="This is test mail").send()
 input("按回车（Enter）继续")
 
-e = mail("zoumingzhe@qq.com", "mingzhe.zou@easystack.cn")
+mail("zoumingzhe@qq.com", "mingzhe.zou@easystack.cn", content="test").send()
+input("按回车（Enter）继续")
+
+e = mail("zoumingzhe@qq.com", "mingzhe.zou@easystack.cn", subject = "test attachment")
 e.attachment('/tmp/test_email.txt')
 e.send()
 input("按回车（Enter）继续")
