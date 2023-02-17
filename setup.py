@@ -6,7 +6,7 @@
 # For Python 3.x use the corresponding Python executable,
 # e.g. "python3 setup.py ..."
 #
-# (C) 2018-2021 ZouMingzhe <zoumingzhe@qq.com>
+# (C) 2018-2023 ZouMingzhe <zoumingzhe@qq.com>
 #
 # SPDX-License-Identifier:    MIT
 
@@ -35,7 +35,6 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'zemail = ztools.utils.zemail:main'
         ]
     },
     # long_description=open('.\README.rst', mode='r', encoding='UTF-8').read(),
@@ -48,17 +47,9 @@ setup(
         'xlwt',
     ],
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Intended Audience :: Developers',
-        'Intended Audience :: End Users/Desktop',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: Chinese (Simplified)',
-        'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Topic :: Software Development :: Libraries',
-        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Natural Language :: Chinese (Simplified)',
     ],
     platforms='any',
 )
