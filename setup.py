@@ -10,6 +10,8 @@
 #
 # SPDX-License-Identifier:    MIT
 
+VERSION = "2.4.6"
+
 try:
     from setuptools import setup
 except ImportError:
@@ -17,11 +19,12 @@ except ImportError:
 
 setup(
     name="ztools",
-    description="ToolBox for Python, Easy to Use.",
-    version="2.4.5",
+    license="MIT",
+    version=VERSION,
     author="Zou Mingzhe",
     author_email="zoumingzhe@qq.com",
     url="https://github.com/zoumingzhe/ztools",
+    description="ToolBox for Python, Easy to Use.",
     packages=[
         'ztools',
         'ztools.common',
@@ -30,7 +33,11 @@ setup(
         'ztools.gui',
         'ztools.utils',
     ],
-    license="MIT",
+    entry_points={
+        'console_scripts': [
+            'zemail = ztools.utils.zemail:main'
+        ]
+    },
     # long_description=open('.\README.rst', mode='r', encoding='UTF-8').read(),
     install_requires=[
         'psutil',

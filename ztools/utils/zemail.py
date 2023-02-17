@@ -69,3 +69,6 @@ class mail:
             return False
         return True
 # ------------------------------------------------------------------------------
+
+def main():
+    print("hello the world")
