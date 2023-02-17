@@ -42,7 +42,6 @@ class fbasic:
     filebase类提供了对文件访问的操作。
     """
     def __init__(self):
-        self.__version = "0.9"
         self.__mappath = {}
 # ------------------------------------------------------------------------------
     def map(self, key = None, path = None):

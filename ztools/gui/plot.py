@@ -67,7 +67,6 @@ class plot(fbasic):
     1、https://matplotlib.org/stable/api/pyplot_summary.html
     """
     def __init__(self):
-        self.__version = "0.10"
         self.__figure  = None
         plt.rcParams['font.sans-serif']=['SimHei']  # 用来正常显示中文标签
         plt.rcParams['axes.unicode_minus']=False    # 用来正常显示负号

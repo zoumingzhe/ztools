@@ -17,8 +17,6 @@ class gitrepo:
     """
 # ------------------------------------------------------------------------------
     def __init__(self, path, url = None, branch = None):
-        print('__init__')
-        self.__version = "0.1"
         if not os.path.exists(path) or not os.listdir(path):
             assert url is not None, 'Missing URL parameter'
             self.__repo = Repo(path, url, branch)

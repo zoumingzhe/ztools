@@ -14,7 +14,7 @@ class csv():
     csv类提供了对.csv文件的操作。
     """
     def __init__(self):
-        self.__version = "0.1"
+        pass
 # ------------------------------------------------------------------------------
     @staticmethod
     def read(csvfile, cleanblank = True):
@@ -63,7 +63,7 @@ class xls(fbasic):
     xls类提供了对.xls文件的操作。
     """
     def __init__(self):
-        self.__version = "0.2"
+        pass
 # ------------------------------------------------------------------------------
     @staticmethod
     def ReadInfo(xls_file):

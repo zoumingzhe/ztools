@@ -16,7 +16,6 @@ class tstack(tbasicop):
     tstack 类提供了堆栈访问接口。
     """
     def __init__(self):
-        self.__version = "0.1"
         self._list = []
 # ------------------------------------------------------------------------------
     def get(self):

@@ -13,7 +13,7 @@ class tbasicop:
     tbasicop 类提供了基础操作。
     """
     def __init__(self):
-        self.__version = "0.1"
+        pass
 # ------------------------------------------------------------------------------
     def len(self):
         """

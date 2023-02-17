@@ -23,7 +23,6 @@ class progressbar:
     progressbar类提供了进度条字符串。
     """
     def __init__(self):
-        self.__version = "0.3"
         self.__progress = 0
         self.__maxlength = 0
         self.__barlist = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█', '█']

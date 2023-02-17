@@ -18,22 +18,10 @@ class SQLite(CRUD):
     SQLite类提供了对SQLite数据库访问的封装，它是基于sqlite3实现的。
     """
     def __init__(self):
-        self.__version = "0.1"
         self.db = None
     def __del__(self):
         if self.db != None:
             self.db.close()
-# ------------------------------------------------------------------------------
-    def Version(self, isShow = False):
-        """
-        版本显示：
-        输入参数：isShow = False
-        返回参数：self.__version
-        说明：调用该方法将返回类的版本号，若isShow == True则会在屏幕上打印版本号。
-        """
-        if(isShow):
-            print("[ztools]-[SQLite]-[vesion:%s]" % self.__version)
-        return self.__version
 # ------------------------------------------------------------------------------
     def link(self, db):
         """

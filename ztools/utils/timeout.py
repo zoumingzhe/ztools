@@ -21,7 +21,6 @@ class timeout:
     timeout类提供了计时和超时判断功能，它通过调用系统time模块来获取时间。
     """
     def __init__(self):
-        self.__version = "0.2"
         self.__start_time = None
 # ------------------------------------------------------------------------------
     def time(self):
