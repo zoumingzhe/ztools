@@ -1,6 +1,4 @@
-# Copyright (c) 2018-2021 ZouMingzhe <zoumingzhe@qq.com>
-# These modules is part of the package,
-# which is released under a MIT licence.
+# Copyright (c) 2018-2023 ZouMingzhe <zoumingzhe@qq.com>
 
 
 """
