@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 pushd `dirname $0`
 pushd ../../
 
