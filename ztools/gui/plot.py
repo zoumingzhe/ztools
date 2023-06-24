@@ -78,6 +78,9 @@ class plot(fbasic):
         plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
         # 有中文出现的情况，需要u'内容'
 
+    def __del__(self):
+        self.close()
+
     def figure(self, id, figsize = None, dpi = None, facecolor = None, edgecolor = None,\
         frameon = True, clear = False):
         """
