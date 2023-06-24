@@ -1,8 +1,11 @@
 # coding=utf-8
 # ------------------------------------------------------------------------------
-# 类 plot
-# ------------------------------------------------------------------------------
-# 变更履历：
+# change log：
+# 2023-06-24 | Zou Mingzhe   | Ver0.11 | remove the self for @staticmethod
+#            |               |         | 1.fix imread(...)
+#            |               |         | 2.fix imshow(...))
+#            |               |         | 3.fix point(...))
+#            |               |         | 4.fix points(...))
 # 2022-08-08 | Zou Mingzhe   | Ver0.10 | 1.部分接口增加 @staticmethod
 # 2021-08-07 | Zou Mingzhe   | Ver0.9  | 1.删除 Version(self, isShow = False)
 #            |               |         | 2.增加 legend(self, *args, **kwargs)
@@ -20,7 +23,7 @@
 # 2019-04-15 | Zou Mingzhe   | Ver0.5  | 1.完善帮助信息
 # 2019-02-11 | Zou Mingzhe   | Ver0.4  | 1.增加 savefig(self, path)
 #            |               |         | 2.增加 imread(self, path)
-#            |               |         | 3.增加 showimage(self, image)
+#            |               |         | 3.增加 imshow(self, image)
 # 2019-01-28 | Zou Mingzhe   | Ver0.3  | 1.增加 grid(self)
 #            |               |         | 2.增加 point(self, x, y, size = None, color = None, marker = None)
 #            |               |         | 3.修改 scatter(self, points)
@@ -35,16 +38,16 @@
 # 已测试 | close(self)                  | 关闭对象
 # 已测试 | show(self)                   | 显示绘图
 # 已测试 | savefig(self, ...)           | 保存绘图
-# 已测试 | imread(self, ...)            | 读取图像文件
-# 已测试 | imshow(self, ...)            | 显示图像
+# 已测试 | imread(...)                  | 读取图像文件
+# 已测试 | imshow(...)                  | 显示图像
 # 已测试 | label(self, ...)             | 添加坐标轴标签
 # 已测试 | title(self, ...)             | 添加标题
 # 已测试 | grid(self)                   | 绘制网格线
 # 已测试 | legend(self, ...)            | 绘制图例
 # 未测试 | subplot(self)                | 绘制子图
 # 未测试 | subplots(self)               | 绘制子图
-# 已测试 | point(self, ...)             | 获取一个点对象
-# 已测试 | points(self, ...)            | 获取多个点对象
+# 已测试 | point(...)                   | 获取一个点对象
+# 已测试 | points(...)                  | 获取多个点对象
 # 已测试 | pie(self, ...)               | 绘制饼图
 # 已测试 | xybar(self, ...)             | 绘制条形图
 # 已测试 | xyplot(self, ...)            | 绘制折线图
@@ -124,7 +127,7 @@ class plot(fbasic):
             print("%s not exist" % self.dirname(path))
 # ------------------------------------------------------------------------------
     @staticmethod
-    def imread(self, path):
+    def imread(path):
         """
         读取图像文件：
         输入参数：
@@ -137,7 +140,7 @@ class plot(fbasic):
         return image
 # ------------------------------------------------------------------------------
     @staticmethod
-    def imshow(self, image):
+    def imshow(image):
         """
         显示图像：
         输入参数：image 图像数据
@@ -226,7 +229,7 @@ class plot(fbasic):
         return plt.subplots(nrows = nrows, ncols = ncols)
 # ------------------------------------------------------------------------------
     @staticmethod
-    def point(self, x, y, size = None, color = None, marker = None):
+    def point(x, y, size = None, color = None, marker = None):
         """
         获取一个点对象：
         输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
@@ -237,7 +240,7 @@ class plot(fbasic):
         return point
 # ------------------------------------------------------------------------------
     @staticmethod
-    def points(self, x, y, size = None, color = None, marker = None):
+    def points(x, y, size = None, color = None, marker = None):
         """
         获取多个点对象：
         输入参数：(x, y, size = None, color = None, marker = None) x、y、大小、颜色、形状
